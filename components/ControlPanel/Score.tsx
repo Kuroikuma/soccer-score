@@ -1,9 +1,9 @@
-import { useMatchStore } from '@/lib/store'
 import { TabsContent } from '@radix-ui/react-tabs'
 import { Button } from '../ui/button'
+import { useTeamStore } from '@/store/useTeam'
 
 export function TabContentScore() {
-  const { homeTeam, awayTeam, updateTeam } = useMatchStore()
+  const { homeTeam, awayTeam, updateTeam } = useTeamStore()
   return (
     <TabsContent value="score" className="p-4 space-y-4">
       <div className="grid grid-cols-2 gap-4">

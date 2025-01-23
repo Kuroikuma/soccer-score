@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { teamRole, useMatchStore } from '@/lib/store'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -13,17 +12,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { defaultFormation } from '@/lib/defaultFormation'
+import { Formation, TeamRole } from '@/store/interfaces'
+import { useTeamStore } from '@/store/useTeam'
 
 export function TabTeamSetup() {
   const {
     homeTeam,
     awayTeam,
     addPlayer,
-    updateTeam,
     updateStaff,
     updateFormation,
-  } = useMatchStore()
-  const [selectedTeam, setSelectedTeam] = useState<teamRole>('home')
+  } = useTeamStore()
+  const [selectedTeam, setSelectedTeam] = useState<TeamRole>('home')
   const [playerName, setPlayerName] = useState('')
   const [playerNumber, setPlayerNumber] = useState('')
   const [playerPosition, setPlayerPosition] = useState('')
@@ -48,20 +49,6 @@ export function TabTeamSetup() {
     setPlayerImage('')
   }
 
-  const formations = ['4-4-2', '4-3-3', '3-5-2', '5-3-2', '4-2-3-1']
-
-  const positions = [
-    'Goalkeeper',
-    'Right Back',
-    'Center Back',
-    'Left Back',
-    'Defensive Midfielder',
-    'Central Midfielder',
-    'Attacking Midfielder',
-    'Right Winger',
-    'Left Winger',
-    'Striker',
-  ]
 
   return (
     <TabsContent value="team-setup" className="p-4 space-y-4">
@@ -84,7 +71,7 @@ export function TabTeamSetup() {
               <Label>Team</Label>
               <Select
                 value={selectedTeam}
-                onValueChange={(value: teamRole) => setSelectedTeam(value)}
+                onValueChange={(value: TeamRole) => setSelectedTeam(value)}
               >
                 <SelectTrigger className="bg-[#2a2438]">
                   <SelectValue placeholder="Select team" />
@@ -124,10 +111,12 @@ export function TabTeamSetup() {
                       <SelectValue placeholder="Select position" />
                     </SelectTrigger>
                     <SelectContent>
-                      {positions.map((position) => (
-                        <SelectItem key={position} value={position}>
-                          {position}
-                        </SelectItem>
+                      {team.formation.positions.map((position) => (
+                        !position.assigned && (
+                          <SelectItem key={position.name} value={position.name}>
+                            {position.name}
+                          </SelectItem>
+                        )
                       ))}
                     </SelectContent>
                   </Select>
@@ -222,7 +211,7 @@ export function TabTeamSetup() {
                 onValueChange={(value) =>
                   updateFormation(selectedTeam, {
                     name: value,
-                    positions: team.formation.positions,
+                    positions: (defaultFormation.find((f) => f.name === value) as Formation).positions,
                   })
                 }
               >
@@ -230,9 +219,9 @@ export function TabTeamSetup() {
                   <SelectValue placeholder="Select formation" />
                 </SelectTrigger>
                 <SelectContent>
-                  {formations.map((formation) => (
-                    <SelectItem key={formation} value={formation}>
-                      {formation}
+                  {defaultFormation.map((formation) => (
+                    <SelectItem key={formation.name} value={formation.name}>
+                      {formation.name}
                     </SelectItem>
                   ))}
                 </SelectContent>

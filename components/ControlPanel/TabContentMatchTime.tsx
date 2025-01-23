@@ -1,11 +1,11 @@
-import { useMatchStore } from '@/lib/store'
 import { TabsContent } from '../ui/tabs'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
+import { useTimeStore } from '@/store/useTIme'
 
 export function TabContentMatchTime() {
-  const { time, period, updateTime, updatePeriod, startMatch, pauseMatch, resetMatch } = useMatchStore()
+  const { time, period, updateTime, updatePeriod, startMatch, pauseMatch, resetMatch } = useTimeStore()
 
   return (
     <TabsContent value="match-time" className="p-4 space-y-4">

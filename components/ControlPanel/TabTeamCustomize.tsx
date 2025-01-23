@@ -1,4 +1,3 @@
-import { teamRole, useMatchStore } from '@/lib/store'
 import { useState } from 'react'
 import { TabsContent } from '../ui/tabs'
 import {
@@ -10,16 +9,13 @@ import {
 } from '../ui/select'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
+import { useTeamStore } from '@/store/useTeam'
+import { TeamRole } from '@/store/interfaces'
 
 export function TabTeamCustomize() {
-  const {
-    homeTeam,
-    awayTeam,
+  const { homeTeam, awayTeam, updateTeam } = useTeamStore()
 
-    updateTeam,
-  } = useMatchStore()
-
-  const [selectedTeam, setSelectedTeam] = useState<teamRole>('home')
+  const [selectedTeam, setSelectedTeam] = useState<TeamRole>('home')
 
   const team = selectedTeam === 'home' ? homeTeam : awayTeam
   return (
@@ -30,7 +26,7 @@ export function TabTeamCustomize() {
             <Label>Team Name</Label>
             <Select
               value={selectedTeam}
-              onValueChange={(value: teamRole) => setSelectedTeam(value)}
+              onValueChange={(value: TeamRole) => setSelectedTeam(value)}
             >
               <SelectTrigger className="bg-[#2a2438]">
                 <SelectValue placeholder="Select team" />

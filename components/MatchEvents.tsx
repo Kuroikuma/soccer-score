@@ -1,15 +1,21 @@
 "use client"
 
-import { teamRole, useMatchStore } from "@/lib/store"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { useTimeStore } from "@/store/useTIme"
+import { useTeamStore } from "@/store/useTeam"
+import { useEventStore } from "@/store/useEvent"
+import { TeamRole } from "@/store/interfaces"
 
 export function MatchEvents() {
-  const { homeTeam, awayTeam, events, time, addEvent, removeEvent } = useMatchStore()
 
-  const handleAddEvent = (type: "goal" | "yellowCard" | "redCard", teamId:teamRole, playerId: string) => {
+  const { time } = useTimeStore()
+  const { homeTeam, awayTeam } = useTeamStore()
+  const { addEvent, events, removeEvent } = useEventStore()
+
+  const handleAddEvent = (type: "goal" | "yellowCard" | "redCard", teamId:TeamRole, playerId: string) => {
     addEvent({
       type,
       teamId,
@@ -18,7 +24,7 @@ export function MatchEvents() {
     })
   }
 
-  const getPlayerName = (teamId: teamRole, playerId: string) => {
+  const getPlayerName = (teamId: TeamRole, playerId: string) => {
     const team = teamId === "home" ? homeTeam : awayTeam
     const player = team.players.find((p) => p.id === playerId)
     return player ? `${player.name} (${player.number})` : "Unknown Player"
@@ -50,7 +56,7 @@ export function MatchEvents() {
             {["home", "away"].map((teamId) => (
               <div key={teamId} className="space-y-2">
                 <h3 className="font-semibold">{teamId === "home" ? homeTeam.name : awayTeam.name}</h3>
-                <Select onValueChange={(playerId) => handleAddEvent("goal", teamId as teamRole, playerId)}>
+                <Select onValueChange={(playerId) => handleAddEvent("goal", teamId as TeamRole, playerId)}>
                   <SelectTrigger className="bg-[#2a2438]">
                     <SelectValue placeholder="Add Goal" />
                   </SelectTrigger>
@@ -62,7 +68,7 @@ export function MatchEvents() {
                     ))}
                   </SelectContent>
                 </Select>
-                <Select onValueChange={(playerId) => handleAddEvent("yellowCard", teamId as teamRole, playerId)}>
+                <Select onValueChange={(playerId) => handleAddEvent("yellowCard", teamId as TeamRole, playerId)}>
                   <SelectTrigger className="bg-[#2a2438]">
                     <SelectValue placeholder="Add Yellow Card" />
                   </SelectTrigger>
@@ -74,7 +80,7 @@ export function MatchEvents() {
                     ))}
                   </SelectContent>
                 </Select>
-                <Select onValueChange={(playerId) => handleAddEvent("redCard", teamId as teamRole, playerId)}>
+                <Select onValueChange={(playerId) => handleAddEvent("redCard", teamId as TeamRole, playerId)}>
                   <SelectTrigger className="bg-[#2a2438]">
                     <SelectValue placeholder="Add Red Card" />
                   </SelectTrigger>

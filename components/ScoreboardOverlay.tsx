@@ -1,8 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useMatchStore } from "@/lib/store"
 import { ChevronUp } from "lucide-react"
+import { useTeamStore } from "@/store/useTeam"
+import { useTimeStore } from "@/store/useTIme"
+import { useEventStore } from "@/store/useEvent"
 
 interface EventNotification {
   id: string
@@ -11,7 +13,9 @@ interface EventNotification {
 }
 
 export function ScoreboardOverlay() {
-  const { homeTeam, awayTeam, time, events, period } = useMatchStore()
+  const { homeTeam, awayTeam } = useTeamStore()
+  const { time, period  } = useTimeStore()
+  const { events } = useEventStore()
   const [notifications, setNotifications] = useState<EventNotification[]>([])
   const activePeriod = period.find((p) => p.active)?.name || "1st Half"
 

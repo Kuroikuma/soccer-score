@@ -1,6 +1,7 @@
 "use client"
 
-import { teamRole, useMatchStore } from "@/lib/store"
+import { TeamRole } from "@/store/interfaces"
+import { useTeamStore } from "@/store/useTeam"
 import { useState } from "react"
 
 interface PlayerPosition {
@@ -51,8 +52,8 @@ const formationPositions: Record<string, PlayerPosition[]> = {
 }
 
 export function FormationOverlay() {
-  const { homeTeam, awayTeam } = useMatchStore()
-  const [selectedTeam, setSelectedTeam] = useState<teamRole>("home")
+  const { homeTeam, awayTeam } = useTeamStore()
+  const [selectedTeam, setSelectedTeam] = useState<TeamRole>("home")
   const team = selectedTeam === "home" ? homeTeam : awayTeam
   const positions = formationPositions[team.formation.name] || formationPositions["4-4-2"]
 
@@ -63,7 +64,7 @@ export function FormationOverlay() {
         <select
           className="bg-gray-800 text-white rounded px-2 py-1"
           value={selectedTeam}
-          onChange={(e) => setSelectedTeam(e.target.value as teamRole)}
+          onChange={(e) => setSelectedTeam(e.target.value as TeamRole)}
         >
           <option value="home">{homeTeam.name}</option>
           <option value="away">{awayTeam.name}</option>

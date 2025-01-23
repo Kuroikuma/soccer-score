@@ -1,16 +1,22 @@
 "use client"
 
-import { teamRole, useMatchStore } from "@/lib/store"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useToast } from "@/hooks/use-toast"
 import { ScoreboardOverlay } from "./ScoreboardOverlay"
+import { useTeamStore } from "@/store/useTeam"
+import { useTimeStore } from "@/store/useTIme"
+import { useEventStore } from "@/store/useEvent"
+import { TeamRole } from "@/store/interfaces"
 
 export default function LiveMatch() {
   const { toast } = useToast()
-  const { homeTeam, awayTeam, time, startMatch, pauseMatch, addEvent } = useMatchStore()
 
-  const addGoal = (teamId: teamRole, playerId: string) => {
+  const { time, startMatch, pauseMatch } = useTimeStore()
+  const { homeTeam, awayTeam } = useTeamStore()
+  const { addEvent } = useEventStore()
+
+  const addGoal = (teamId: TeamRole, playerId: string) => {
     addEvent({
       type: "goal",
       teamId,
@@ -28,7 +34,7 @@ export default function LiveMatch() {
     }
   }
 
-  const handleAddGoal = (team: teamRole) => {
+  const handleAddGoal = (team: TeamRole) => {
     addGoal(team, "placeholder")
     toast({
       title: "Goal!",

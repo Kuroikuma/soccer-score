@@ -1,15 +1,20 @@
 "use client"
 
-import { teamRole, useMatchStore } from "@/lib/store"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useState } from "react"
+import { useTimeStore } from "@/store/useTIme"
+import { useTeamStore } from "@/store/useTeam"
+import { useEventStore } from "@/store/useEvent"
+import { TeamRole } from "@/store/interfaces"
 
 export function Substitutions() {
-  const { homeTeam, awayTeam, time, substitutions, addSubstitution, removeSubstitution } = useMatchStore()
-  const [selectedTeam, setSelectedTeam] = useState<teamRole>("home")
+  const { homeTeam, awayTeam } = useTeamStore()
+  const { time,   } = useTimeStore()
+  const { addSubstitution, removeSubstitution, substitutions } = useEventStore()
+  const [selectedTeam, setSelectedTeam] = useState<TeamRole>("home")
   const [playerOutId, setPlayerOutId] = useState("")
   const [playerInId, setPlayerInId] = useState("")
 
@@ -26,7 +31,7 @@ export function Substitutions() {
     }
   }
 
-  const getPlayerName = (teamId: teamRole, playerId: string) => {
+  const getPlayerName = (teamId: TeamRole, playerId: string) => {
     const team = teamId === "home" ? homeTeam : awayTeam
     const player = team.players.find((p) => p.id === playerId)
     return player ? `${player.name} (${player.number})` : "Unknown Player"
@@ -39,7 +44,7 @@ export function Substitutions() {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <Select value={selectedTeam} onValueChange={(value: teamRole) => setSelectedTeam(value)}>
+          <Select value={selectedTeam} onValueChange={(value: TeamRole) => setSelectedTeam(value)}>
             <SelectTrigger className="bg-[#2a2438]">
               <SelectValue placeholder="Select team" />
             </SelectTrigger>

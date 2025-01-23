@@ -1,9 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { teamRole, useMatchStore } from '@/lib/store'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Select,
   SelectContent,
@@ -13,22 +11,19 @@ import {
 } from '@/components/ui/select'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useTimeStore } from '@/store/useTIme'
+import { useTeamStore } from '@/store/useTeam'
+import { useEventStore } from '@/store/useEvent'
+import { TeamRole } from '@/store/interfaces'
 
 export function TabMatchEvents() {
-  const {
-    homeTeam,
-    awayTeam,
-    events,
-    substitutions,
-    time,
-    addEvent,
-    removeEvent,
-    addSubstitution,
-    removeSubstitution,
-  } = useMatchStore()
-  const [selectedTeam, setSelectedTeam] = useState<teamRole>('home')
+
+  const { time } = useTimeStore()
+  const { homeTeam, awayTeam } = useTeamStore()
+  const { addEvent, events, removeEvent, addSubstitution,  removeSubstitution, substitutions } = useEventStore()
+
+  const [selectedTeam, setSelectedTeam] = useState<TeamRole>('home')
   const [eventType, setEventType] = useState<
     'goal' | 'yellowCard' | 'redCard' | 'substitution'
   >('goal')
@@ -61,7 +56,7 @@ export function TabMatchEvents() {
     }
   }
 
-  const getPlayerName = (teamId: teamRole, playerId: string) => {
+  const getPlayerName = (teamId: TeamRole, playerId: string) => {
     const team = teamId === 'home' ? homeTeam : awayTeam
     const player = team.players.find((p) => p.id === playerId)
     return player ? `${player.name} (${player.number})` : 'Unknown Player'
@@ -90,7 +85,7 @@ export function TabMatchEvents() {
             <Label>Team</Label>
             <Select
               value={selectedTeam}
-              onValueChange={(value: teamRole) => setSelectedTeam(value)}
+              onValueChange={(value: TeamRole) => setSelectedTeam(value)}
             >
               <SelectTrigger className="bg-[#2a2438]">
                 <SelectValue placeholder="Select team" />

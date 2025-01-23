@@ -1,92 +1,21 @@
+import { Formation, MatchEvent, MatchState, Player, Staff, Substitution, Team, TeamRole } from "@/store/interfaces"
 import { create } from "zustand"
-
-interface Player {
-  id: string
-  name: string
-  number: number
-  position: string
-  image?: string
-}
-
-interface Staff {
-  manager: string
-  assistantManager: string
-  physio: string
-}
-
-interface Formation {
-  name: string // e.g. "4-4-2", "4-3-3"
-  positions: string[]
-}
-
-export type teamRole = "home" | "away"
-
-interface MatchEvent {
-  id: string
-  type: "goal" | "yellowCard" | "redCard" | "substitution"
-  minute: number
-  teamId: teamRole
-  playerId: string
-  assistById?: string // for goals
-  replacedById?: string // for substitutions
-}
-
-interface Substitution {
-  id: string
-  minute: number
-  teamId: teamRole
-  playerOutId: string
-  playerInId: string
-}
-
-interface Team {
-  name: string
-  score: number
-  color: string
-  textColor: string
-  logo: string
-  logoFit: "contain" | "cover"
-  players: Player[]
-  staff: Staff
-  formation: Formation
-  teamRole : teamRole
-}
-
-interface MatchState {
-  homeTeam: Team
-  awayTeam: Team
-  events: MatchEvent[]
-  time: {
-    minutes: number
-    seconds: number
-    stoppage: number
-    isRunning: boolean
-  }
-  period: {
-    name: "1st Half" | "2nd Half" | "1st Extra" | "2nd Extra"
-    active: boolean
-  }[]
-  overlay: {
-    enabled: boolean
-    horizontalPosition: number
-    verticalPosition: number
-    showEvents: boolean
-    eventDuration: number
-  }
-  dropdown: {
-    enabled: boolean
-    type: "Substitutes" | "Goals" | "Cards"
-    playerNumberOut: string
-    playerNameOut: string
-    playerNumberIn: string
-    playerNameIn: string
-  }
-  substitutions: Substitution[]
-}
 
 const defaultFormation: Formation = {
   name: "4-4-2",
-  positions: ["GK", "RB", "CB", "CB", "LB", "RM", "CM", "CM", "LM", "ST", "ST"],
+  positions: [
+    { name: "GK", assigned: false },
+    { name: "LB", assigned: false },
+    { name: "CB1", assigned: false },
+    { name: "CB2", assigned: false },
+    { name: "RB", assigned: false },
+    { name: "LM", assigned: false },
+    { name: "CM1", assigned: false },
+    { name: "CM2", assigned: false },
+    { name: "RM", assigned: false },
+    { name: "ST1", assigned: false },
+    { name: "ST2", assigned: false },
+  ],
 }
 
 const defaultStaff: Staff = {
@@ -152,10 +81,10 @@ const initialState: MatchState = {
 }
 
 interface MatchStore extends MatchState {
-  addPlayer: (team: teamRole, player: Omit<Player, "id">) => void
-  updateTeam: (team: teamRole, updates: Partial<Team>) => void
-  updateStaff: (team: teamRole, updates: Partial<Staff>) => void
-  updateFormation: (team: teamRole, formation: Formation) => void
+  addPlayer: (teamRole: TeamRole, player: Omit<Player, "id">) => void
+  updateTeam: (team: TeamRole, updates: Partial<Team>) => void
+  updateStaff: (team: TeamRole, updates: Partial<Staff>) => void
+  updateFormation: (team: TeamRole, formation: Formation) => void
   addEvent: (event: Omit<MatchEvent, "id">) => void
   removeEvent: (eventId: string) => void
   startMatch: () => void
@@ -165,21 +94,37 @@ interface MatchStore extends MatchState {
   removeSubstitution: (substitutionId: string) => void
   updatePeriod: (periodName: string) => void
   updateTime: (timeUpdate: Partial<typeof initialState.time>) => void
-  updateTeamName: (team: teamRole, name: string) => void
+  updateTeamName: (team: TeamRole, name: string) => void
 }
 
-export const useMatchStore = create<MatchStore>((set) => ({
+export const useMatchStore = create<MatchStore>((set, get) => ({
   ...initialState,
-  addPlayer: (team, playerData) =>
-    set((state) => ({
-      [team === "home" ? "homeTeam" : "awayTeam"]: {
-        ...state[team === "home" ? "homeTeam" : "awayTeam"],
+  addPlayer: (teamRole, playerData) =>{
+    const { homeTeam, awayTeam } = get()
+
+    let team = teamRole === "home" ? homeTeam : awayTeam;
+
+    const updatedFormation = team.formation.positions.map((pos) => {
+      if (!pos.assigned && pos.name === playerData.position) {
+        return { ...pos, assigned: true };
+      }
+      return pos;
+    });
+
+    set(({
+      [teamRole === "home" ? "homeTeam" : "awayTeam"]: {
+        ...team,
         players: [
-          ...state[team === "home" ? "homeTeam" : "awayTeam"].players,
+          ...team.players,
           { ...playerData, id: Date.now().toString() },
         ],
+        formation: {
+          ...team.formation,
+          positions: updatedFormation,
+        },
       },
-    })),
+    }))
+  },
   updateTeam: (team, updates) =>
     set((state) => ({
       [team === "home" ? "homeTeam" : "awayTeam"]: {

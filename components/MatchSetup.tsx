@@ -2,17 +2,19 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { useMatchStore } from "@/lib/store"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
+import { useTeamStore } from "@/store/useTeam"
+import { useTimeStore } from "@/store/useTIme"
 
 export default function MatchSetup() {
   const router = useRouter()
   const { toast } = useToast()
-  const { homeTeam, awayTeam, startMatch, updateTeamName } = useMatchStore()
+  const { homeTeam, awayTeam, updateTeamName } = useTeamStore()
+  const { startMatch } = useTimeStore()
   const setHomeTeam = (name: string) => updateTeamName("home", name)
   const setAwayTeam = (name: string) => updateTeamName("away", name)
   const [duration, setDuration] = useState("90")

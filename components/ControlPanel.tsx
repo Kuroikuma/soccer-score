@@ -3,7 +3,6 @@
 import { useEffect, useCallback } from "react"
 import { Tabs } from "@/components/ui/tabs"
 import { Card } from "@/components/ui/card"
-import { useMatchStore } from "@/lib/store"
 import { TabTeamSetup } from "./TeamManagement"
 import { TabMatchEvents } from "./MatchEventsAndSubs"
 import { TabControlPanel } from "./ControlPanel/TabControlPanel"
@@ -11,9 +10,10 @@ import { TabContentScore } from "./ControlPanel/Score"
 import { TabContentMatchTime } from "./ControlPanel/TabContentMatchTime"
 import { TabTeamCustomize } from "./ControlPanel/TabTeamCustomize"
 import './styles.scss';
+import { useTimeStore } from "@/store/useTIme"
 
 export function ControlPanel() {
-  const { time, updateTime } = useMatchStore()
+  const { time, updateTime } = useTimeStore()
 
   const updateMatchTime = useCallback(() => {
     if (time.seconds + 1 >= 60) {

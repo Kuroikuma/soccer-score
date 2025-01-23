@@ -1,15 +1,16 @@
 "use client"
 
 import { useState } from "react"
-import { teamRole, useMatchStore } from "@/lib/store"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
+import { useTeamStore } from "@/store/useTeam"
+import { TeamRole } from "@/store/interfaces"
 
 export default function PlayerManagement() {
-  const { homeTeam, awayTeam, addPlayer } = useMatchStore()
+  const { homeTeam, awayTeam, addPlayer } = useTeamStore()
   const { toast } = useToast()
   const [playerName, setPlayerName] = useState("")
   const [playerNumber, setPlayerNumber] = useState("")
@@ -32,7 +33,7 @@ export default function PlayerManagement() {
       number: Number.parseInt(playerNumber),
       position: playerPosition,
     }
-    addPlayer(team as teamRole, newPlayer)
+    addPlayer(team as TeamRole, newPlayer)
     setPlayerName("")
     setPlayerNumber("")
     setPlayerPosition("")
