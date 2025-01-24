@@ -19,7 +19,7 @@ export default function TeamPlate({ logo, name, primaryColor, secondaryColor }: 
 
       {/* Name Container */}
       <div className="flex h-10 flex-1 items-center justify-center skew-x-12 border-r-8" style={{backgroundColor: primaryColor, borderRightColor: secondaryColor}}>
-        <span className="font-bold uppercase text-center tracking-wide text-white -skew-x-12" style={{color: secondaryColor}}>{name}</span>
+        <span className="font-bold uppercase text-lg text-center tracking-wide text-white -skew-x-12" style={{color: secondaryColor}}>{name}</span>
       </div>
     </div>
   )

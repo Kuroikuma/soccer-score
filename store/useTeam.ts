@@ -19,7 +19,7 @@ const defaultFormation: Formation = {
 }
 
 const defaultStaff: Staff = {
-  manager: "",
+  manager: "Alexander Ampie",
   assistantManager: "",
   physio: "",
 }
