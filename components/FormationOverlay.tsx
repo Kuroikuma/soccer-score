@@ -12,7 +12,7 @@ export const FormationOverlay = () => {
   const teamName = teamHome.name
 
   return (
-    <div className="relative w-full h-full font-['Roboto_Condensed']">
+    <div className="relative w-full h-full font-['Roboto_Condensed'] bg-transparent">
       {/* Nombre del equipo */}
 
       <div className="grid grid-cols-3 grid-rows-1 gap-4">
@@ -38,7 +38,7 @@ export const FormationOverlay = () => {
 
           {/* Campo de fútbol */}
           {/* Campo de fútbol */}
-          <div className="relative w-full h-[calc(100vh)] bg-green-700 rounded-lg border-4 border-white">
+          <div className="relative w-full h-[calc(100vh)] bg-transparent rounded-lg border-4 border-white">
             {/* Líneas del campo */}
             <div className="absolute inset-0 flex flex-col">
               <FormationSVG />
