@@ -38,7 +38,7 @@ export const FormationOverlay = () => {
 
           {/* Campo de fútbol */}
           {/* Campo de fútbol */}
-          <div className="relative w-full h-[calc(100vh)] bg-transparent rounded-lg border-4 border-white">
+          <div className="relative w-full h-[calc(100vh)] bg-transparent rounded-lg">
             {/* Líneas del campo */}
             <div className="absolute inset-0 flex flex-col">
               <FormationSVG />
