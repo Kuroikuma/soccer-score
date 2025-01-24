@@ -1,6 +1,5 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import { OverlayItem } from './page'
-import { SetStateAction, useEffect } from 'react'
+
+import { useEffect } from 'react'
 import { IOverlays } from '@/store/interfaces'
 import { useOverlaysStore } from '@/store/overlayStore'
 import socket from '@/services/socket'

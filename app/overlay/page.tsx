@@ -4,9 +4,6 @@ import { useCallback, useState, useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import { useParams } from 'next/navigation'
 import { OverlaysItem } from './OverlaysItem'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { ArrowLeft } from 'lucide-react'
 import { useOverlaysStore } from '@/store/overlayStore'
 
 const DraggableComponent = dynamic(

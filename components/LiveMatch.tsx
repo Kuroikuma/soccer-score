@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useToast } from "@/hooks/use-toast"
 import { ScoreboardOverlay } from "./ScoreboardOverlay"
 import { useTeamStore } from "@/store/useTeam"
-import { useTimeStore } from "@/store/useTIme"
+import { useTimeStore } from "@/store/useTime"
 import { useEventStore } from "@/store/useEvent"
 import { TeamRole } from "@/store/interfaces"
 

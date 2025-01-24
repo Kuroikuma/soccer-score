@@ -10,7 +10,7 @@ import { TabContentScore } from "./ControlPanel/Score"
 import { TabContentMatchTime } from "./ControlPanel/TabContentMatchTime"
 import { TabTeamCustomize } from "./ControlPanel/TabTeamCustomize"
 import './styles.scss';
-import { useTimeStore } from "@/store/useTIme"
+import { useTimeStore } from "@/store/useTime"
 
 export function ControlPanel() {
   const { time, updateTime } = useTimeStore()
