@@ -2,6 +2,7 @@ import { useTeamStore } from '@/store/useTeam'
 import FormationSVG from './svg/formation'
 import JerseySVG from './svg/jersey'
 import PlayerPlate from './formation/PlayerPlate'
+import TeamPlate from './formation/TeamPlate'
 
 export const FormationOverlay = () => {
   const formation = useTeamStore((state) => state.homeTeam.formation)
@@ -15,15 +16,15 @@ export const FormationOverlay = () => {
 
       <div className="grid grid-cols-3 grid-rows-1 gap-4">
         <div className="flex flex-col items-center justify-between">
-          <span className="text-black text-sm font-semibold text-center">
-            {teamName}
-          </span>
+          <TeamPlate logo="/logoEquipo.svg" name={teamName} primaryColor={teamHome.primaryColor} secondaryColor={teamHome.secondaryColor} />
           <div className="flex flex-col gap-1">
             {players.map((player, index) => (
               <PlayerPlate
                 key={index}
                 number={player.number}
                 name={player.name}
+                primaryColor={teamHome.primaryColor}
+                secondaryColor={teamHome.secondaryColor}
               />
             ))}
           </div>
@@ -54,7 +55,7 @@ export const FormationOverlay = () => {
                 >
                   {/* Camiseta SVG */}
                   <div className="relative">
-                    <JerseySVG />
+                    <JerseySVG primaryColor={teamHome.primaryColor} secondaryColor={teamHome.secondaryColor} />
                     {/* Número del jugador */}
                     <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-xl">
                       {player?.number ?? '?'}

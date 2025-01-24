@@ -70,6 +70,8 @@ export interface Team {
   staff: Staff
   formation: Formation
   teamRole : TeamRole
+  primaryColor: string
+  secondaryColor: string
 }
 
 export interface Time {
