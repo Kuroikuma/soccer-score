@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { ChevronUp } from "lucide-react"
 import { useTeamStore } from "@/store/useTeam"
-import { useTimeStore } from "@/store/useTIme"
+import { useTimeStore } from "@/store/useTime"
 import { useEventStore } from "@/store/useEvent"
 
 interface EventNotification {
@@ -50,7 +50,7 @@ export function ScoreboardOverlay() {
   }, [events, homeTeam, awayTeam])
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50">
+    <div className="relative">
       <div className="max-w-5xl mx-auto">
         <div className="relative">
           {/* Main Scoreboard */}

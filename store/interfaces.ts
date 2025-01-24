@@ -6,6 +6,21 @@ export interface Player {
   image?: string
 }
 
+let __initOverlays = {
+  x: 100,
+  y: 100,
+  scale: 100,
+  visible: false,
+};
+
+export type IOverlays = {
+  visible: boolean;
+  x: number;
+  y: number;
+  scale: number;
+  id: string;
+}
+
 export interface Staff {
   manager: string
   assistantManager: string
@@ -15,6 +30,8 @@ export interface Staff {
 export interface PositionFormation {
   name: string
   assigned: boolean
+  x: number
+  y: number
 }
 
 export interface Formation {
@@ -116,6 +133,10 @@ export interface TimeState {
   }[]
 }
 
+export interface OverlayState {
+  scoreboardOverlay: IOverlays
+  formationOverlay: IOverlays
+}
 export interface TeamState {
   homeTeam: Team
   awayTeam: Team

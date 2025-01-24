@@ -1,62 +1,111 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
-import { DraggableElement } from "@/components/DraggableElement"
-import { ScoreboardOverlay } from "@/components/ScoreboardOverlay"
-import { FormationOverlay } from "@/components/FormationOverlay"
+import { useCallback, useState, useEffect, useRef } from 'react'
+import dynamic from 'next/dynamic'
+import { useParams } from 'next/navigation'
+import { OverlaysItem } from './OverlaysItem'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { ArrowLeft } from 'lucide-react'
+import { useOverlaysStore } from '@/store/overlayStore'
+
+const DraggableComponent = dynamic(
+  () =>
+    import('react-draggable').then((mod) => {
+      const Draggable = mod.default
+      return ({ children, ...props }: any) => {
+        const nodeRef = useRef(null)
+        return (
+          <Draggable {...props} nodeRef={nodeRef}>
+            <div ref={nodeRef}>{children}</div>
+          </Draggable>
+        )
+      }
+    }),
+  { ssr: false }
+)
+
+interface Position {
+  x: number
+  y: number
+}
+
+export interface OverlayItem {
+  id: string
+  position: Position
+  component: React.ReactNode
+  width: string
+  height: string
+  scale: number
+  visible: boolean
+}
 
 export default function OverlayPage() {
-  const [elements, setElements] = useState([
-    { id: "scoreboard", type: "scoreboard", x: 0, y: 0, visible: true },
-    { id: "formation", type: "formation", x: 0, y: 200, visible: true },
-  ])
+  const paramas = useParams()
+  const id = paramas?.id as string
 
-  const updateElementPosition = (id: string, x: number, y: number) => {
-    setElements(elements.map((el) => (el.id === id ? { ...el, x, y } : el)))
-  }
+  const [gameId, setGameId] = useState<string | null>(id)
 
-  const toggleElementVisibility = (id: string) => {
-    setElements(elements.map((el) => (el.id === id ? { ...el, visible: !el.visible } : el)))
+  const {
+    scoreboardOverlay,
+    formationOverlay,
+    handlePositionOverlay,
+  } = useOverlaysStore()
+
+  const overlays = [
+    formationOverlay,
+    scoreboardOverlay,
+   
+  ]
+
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const handleDragStop = useCallback(
+    (id: string, data: { x: number; y: number }) => {
+      data.y = parseFloat(((data.y / window.innerHeight) * 100).toFixed(2));
+      handlePositionOverlay(id, data)
+    },
+    []
+  )
+
+  if (!mounted) {
+    return null
   }
 
   return (
-    <main className="min-h-screen bg-[#13111a] text-white">
-      <div className="fixed top-4 left-4 z-50">
-        <Link href="/">
-          <Button variant="outline" size="icon">
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-        </Link>
-      </div>
-
-      <div className="fixed top-4 right-4 z-50 flex gap-2">
-        {elements.map((el) => (
-          <Button
-            key={el.id}
-            variant={el.visible ? "default" : "outline"}
-            onClick={() => toggleElementVisibility(el.id)}
+    <div className="relative w-screen h-[calc(100vh)] bg-[#1a472a00] overflow-hidden">
+      {overlays.map((item) => {
+        let y = (item.y / 100) * window.innerHeight
+        return (
+          <DraggableComponent
+            key={item.id}
+            position={{ x: item.x, y: y }}
+            // defaultPosition={{ x: item.x, y: item.y }} // Usa `defaultPosition` en lugar de `position`.
+            onStop={(_: any, data: any) =>
+              handleDragStop(item.id, { x: data.x, y: data.y })
+            }
+            // bounds="parent"
+            handle={item.id.includes('formation') ? undefined : '.drag-handle'}
+            disabled={item.id.includes('formation')} // Evita mover el campo.
           >
-            {el.id.charAt(0).toUpperCase() + el.id.slice(1)}
-          </Button>
-        ))}
-      </div>
-
-      {elements.map((el) => (
-        <DraggableElement
-          key={el.id}
-          id={el.id}
-          x={el.x}
-          y={el.y}
-          onPositionChange={(x, y) => updateElementPosition(el.id, x, y)}
-          visible={el.visible}
-        >
-          {el.type === "scoreboard" ? <ScoreboardOverlay /> : <FormationOverlay />}
-        </DraggableElement>
-      ))}
-    </main>
+            <div className="absolute" style={{ width: '100%', height: '100%' }}>
+              <div
+                style={{ transform: `scale(${item.scale / 100})` }}
+                className={`relative transform scale-[${item.scale / 100}]`}
+              >
+                {!item.id.includes('formation') && (
+                  <div className="drag-handle absolute -top-2 left-0 right-0 h-6 bg-white/10 rounded-t cursor-move opacity-0 hover:opacity-100 transition-opacity" />
+                )}
+                <OverlaysItem item={item} gameId={gameId || ''} />
+              </div>
+            </div>
+          </DraggableComponent>
+        )
+      })}
+    </div>
   )
 }
-

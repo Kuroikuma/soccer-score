@@ -12,7 +12,7 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Label } from '@/components/ui/label'
-import { useTimeStore } from '@/store/useTIme'
+import { useTimeStore } from '@/store/useTime'
 import { useTeamStore } from '@/store/useTeam'
 import { useEventStore } from '@/store/useEvent'
 import { TeamRole } from '@/store/interfaces'

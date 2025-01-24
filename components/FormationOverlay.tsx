@@ -1,125 +1,77 @@
-"use client"
+import { useTeamStore } from '@/store/useTeam'
+import FormationSVG from './svg/formation'
+import JerseySVG from './svg/jersey'
 
-import { TeamRole } from "@/store/interfaces"
-import { useTeamStore } from "@/store/useTeam"
-import { useState } from "react"
-
-interface PlayerPosition {
-  x: number
-  y: number
-}
-
-const formationPositions: Record<string, PlayerPosition[]> = {
-  "4-4-2": [
-    { x: 50, y: 90 }, // GK
-    { x: 20, y: 70 }, // RB
-    { x: 40, y: 70 }, // CB
-    { x: 60, y: 70 }, // CB
-    { x: 80, y: 70 }, // LB
-    { x: 20, y: 50 }, // RM
-    { x: 40, y: 50 }, // CM
-    { x: 60, y: 50 }, // CM
-    { x: 80, y: 50 }, // LM
-    { x: 35, y: 30 }, // ST
-    { x: 65, y: 30 }, // ST
-  ],
-  "4-3-3": [
-    { x: 50, y: 90 }, // GK
-    { x: 20, y: 70 }, // RB
-    { x: 40, y: 70 }, // CB
-    { x: 60, y: 70 }, // CB
-    { x: 80, y: 70 }, // LB
-    { x: 30, y: 50 }, // CM
-    { x: 50, y: 50 }, // CM
-    { x: 70, y: 50 }, // CM
-    { x: 20, y: 30 }, // RW
-    { x: 50, y: 30 }, // ST
-    { x: 80, y: 30 }, // LW
-  ],
-  "3-5-2": [
-    { x: 50, y: 90 }, // GK
-    { x: 30, y: 70 }, // CB
-    { x: 50, y: 70 }, // CB
-    { x: 70, y: 70 }, // CB
-    { x: 20, y: 50 }, // RM
-    { x: 35, y: 50 }, // CM
-    { x: 50, y: 50 }, // CM
-    { x: 65, y: 50 }, // CM
-    { x: 80, y: 50 }, // LM
-    { x: 35, y: 30 }, // ST
-    { x: 65, y: 30 }, // ST
-  ],
-}
-
-export function FormationOverlay() {
-  const { homeTeam, awayTeam } = useTeamStore()
-  const [selectedTeam, setSelectedTeam] = useState<TeamRole>("home")
-  const team = selectedTeam === "home" ? homeTeam : awayTeam
-  const positions = formationPositions[team.formation.name] || formationPositions["4-4-2"]
+export const FormationOverlay = () => {
+  const formation = useTeamStore((state) => state.homeTeam.formation)
+  const teamName = useTeamStore((state) => state.homeTeam.name)
+  // Estilo dinámico para las posiciones, ajustado al diseño
+  // Estilo dinámico para las posiciones
+  const getPositionStyle = (index: number) => {
+    const positionMap = [
+      { top: '5%', left: '50%' }, // Portero
+      { top: '20%', left: '20%' }, // Defensa izquierda
+      { top: '20%', left: '40%' }, // Defensa central izquierda
+      { top: '20%', left: '60%' }, // Defensa central derecha
+      { top: '20%', left: '80%' }, // Defensa derecha
+      { top: '50%', left: '20%' }, // Mediocampo izquierdo
+      { top: '50%', left: '40%' }, // Mediocampo central izquierda
+      { top: '50%', left: '60%' }, // Mediocampo central derecha
+      { top: '50%', left: '80%' }, // Mediocampo derecho
+      { top: '75%', left: '40%' }, // Delantero izquierda
+      { top: '75%', left: '60%' }, // Delantero derecha
+    ]
+    return positionMap[index] || { top: '50%', left: '50%' }
+  }
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 bg-black/90 p-4 rounded-lg">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-white font-bold">{team.name} Formation</h3>
-        <select
-          className="bg-gray-800 text-white rounded px-2 py-1"
-          value={selectedTeam}
-          onChange={(e) => setSelectedTeam(e.target.value as TeamRole)}
-        >
-          <option value="home">{homeTeam.name}</option>
-          <option value="away">{awayTeam.name}</option>
-        </select>
-      </div>
+    <div className="relative w-full h-full">
+      {/* Nombre del equipo */}
 
-      <div className="relative w-[300px] h-[400px]">
-        {/* Soccer field */}
-        <svg width="100%" height="100%" viewBox="0 0 100 100" className="absolute inset-0">
-          {/* Field background */}
-          <rect width="100" height="100" fill="#2a5" />
+      <div className="grid grid-cols-3 grid-rows-1 gap-4">
+        <div>1</div>
+        <div  className="col-span-2">
+          {/* <div className="text-center text-white text-2xl font-bold mb-4">
+            {teamName}
+          </div> */}
 
-          {/* Field lines */}
-          <rect x="0" y="0" width="100" height="100" fill="none" stroke="white" strokeWidth="0.5" />
-          <circle cx="50" cy="50" r="10" fill="none" stroke="white" strokeWidth="0.5" />
-          <line x1="50" y1="0" x2="50" y2="100" stroke="white" strokeWidth="0.5" />
-
-          {/* Penalty areas */}
-          <rect x="30" y="0" width="40" height="20" fill="none" stroke="white" strokeWidth="0.5" />
-          <rect x="30" y="80" width="40" height="20" fill="none" stroke="white" strokeWidth="0.5" />
-
-          {/* Goal areas */}
-          <rect x="40" y="0" width="20" height="8" fill="none" stroke="white" strokeWidth="0.5" />
-          <rect x="40" y="92" width="20" height="8" fill="none" stroke="white" strokeWidth="0.5" />
-        </svg>
-
-        {/* Players */}
-        {team.players.slice(0, 11).map((player, index) => {
-          const position = positions[index]
-          return (
-            <div
-              key={player.id}
-              className="absolute transform -translate-x-1/2 -translate-y-1/2"
-              style={{
-                left: `${position.x}%`,
-                top: `${position.y}%`,
-              }}
-            >
-              <div className="flex flex-col items-center">
-                <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold"
-                  style={{
-                    backgroundColor: team.color,
-                    color: team.textColor,
-                  }}
-                >
-                  {player.number}
-                </div>
-                <div className="text-white text-xs mt-1 whitespace-nowrap">{player.name}</div>
-              </div>
+          {/* Campo de fútbol */}
+          {/* Campo de fútbol */}
+          <div className="relative w-full h-[calc(100vh)] bg-green-700 rounded-lg border-4 border-white">
+            {/* Líneas del campo */}
+            <div className="absolute inset-0 flex flex-col">
+              <FormationSVG />
             </div>
-          )
-        })}
+
+            {/* Posiciones de los jugadores */}
+            {formation.positions.map((position, index) => (
+              <div
+                key={position.name}
+                className="absolute flex flex-col items-center"
+                style={{ top: `${position.y}%`, left: `${position.x}%` }}
+              >
+                {/* Camiseta SVG */}
+                <div className="relative">
+                  <JerseySVG />
+                  {/* Número del jugador */}
+                  <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-xl">
+                    {'?'}
+                  </div>
+                </div>
+                {/* Nombre del jugador */}
+                <div className="text-white text-sm font-semibold text-center">
+                  {position.name}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Nombre del entrenador */}
+          {/* <div className="mt-4 text-center text-white text-lg font-semibold">
+            Junior
+          </div> */}
+        </div>
       </div>
     </div>
   )
 }
-
