@@ -35,7 +35,9 @@ const initialState: MatchState = {
     players: [],
     staff: defaultStaff,
     formation: defaultFormation,
-    teamRole: "home"
+    teamRole: "home",
+    primaryColor: "",
+    secondaryColor: "",
   },
   awayTeam: {
     name: "Away Team",
@@ -47,7 +49,9 @@ const initialState: MatchState = {
     players: [],
     staff: defaultStaff,
     formation: defaultFormation,
-    teamRole: "away"
+    teamRole: "away",
+    primaryColor: "",
+    secondaryColor: "",
   },
   events: [],
   time: {
