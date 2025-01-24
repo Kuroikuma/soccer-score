@@ -57,12 +57,12 @@ export const FormationOverlay = () => {
                   <div className="relative">
                     <JerseySVG primaryColor={teamHome.primaryColor} secondaryColor={teamHome.secondaryColor} />
                     {/* Número del jugador */}
-                    <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-xl">
+                    <div className="absolute inset-0 flex items-center justify-center font-bold text-xl" style={{color: teamHome.textColor}}>
                       {player?.number ?? '?'}
                     </div>
                   </div>
                   {/* Nombre del jugador */}
-                  <div className="text-black text-sm font-semibold text-center">
+                  <div className="text-sm font-semibold text-center" style={{color: teamHome.textColor}}>
                     {player?.name ?? 'Sin asignar'}
                   </div>
                 </div>
