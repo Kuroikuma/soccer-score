@@ -1,36 +1,34 @@
 import { useTeamStore } from '@/store/useTeam'
 import FormationSVG from './svg/formation'
 import JerseySVG from './svg/jersey'
+import PlayerPlate from './formation/PlayerPlate'
 
 export const FormationOverlay = () => {
   const formation = useTeamStore((state) => state.homeTeam.formation)
-  const teamName = useTeamStore((state) => state.homeTeam.name)
-  // Estilo dinámico para las posiciones, ajustado al diseño
-  // Estilo dinámico para las posiciones
-  const getPositionStyle = (index: number) => {
-    const positionMap = [
-      { top: '5%', left: '50%' }, // Portero
-      { top: '20%', left: '20%' }, // Defensa izquierda
-      { top: '20%', left: '40%' }, // Defensa central izquierda
-      { top: '20%', left: '60%' }, // Defensa central derecha
-      { top: '20%', left: '80%' }, // Defensa derecha
-      { top: '50%', left: '20%' }, // Mediocampo izquierdo
-      { top: '50%', left: '40%' }, // Mediocampo central izquierda
-      { top: '50%', left: '60%' }, // Mediocampo central derecha
-      { top: '50%', left: '80%' }, // Mediocampo derecho
-      { top: '75%', left: '40%' }, // Delantero izquierda
-      { top: '75%', left: '60%' }, // Delantero derecha
-    ]
-    return positionMap[index] || { top: '50%', left: '50%' }
-  }
+  const teamHome = useTeamStore((state) => state.homeTeam)
+  const players = useTeamStore((state) => state.homeTeam.players)
+  const teamName = teamHome.name
 
   return (
     <div className="relative w-full h-full">
       {/* Nombre del equipo */}
 
       <div className="grid grid-cols-3 grid-rows-1 gap-4">
-        <div>1</div>
-        <div  className="col-span-2">
+        <div className="flex flex-col items-center justify-between">
+          <span className="text-black text-sm font-semibold text-center">
+            {teamName}
+          </span>
+          <div className="flex flex-col gap-1">
+            {players.map((player, index) => (
+              <PlayerPlate
+                key={index}
+                number={player.number}
+                name={player.name}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="col-span-2">
           {/* <div className="text-center text-white text-2xl font-bold mb-4">
             {teamName}
           </div> */}
@@ -44,26 +42,31 @@ export const FormationOverlay = () => {
             </div>
 
             {/* Posiciones de los jugadores */}
-            {formation.positions.map((position, index) => (
-              <div
-                key={position.name}
-                className="absolute flex flex-col items-center"
-                style={{ top: `${position.y}%`, left: `${position.x}%` }}
-              >
-                {/* Camiseta SVG */}
-                <div className="relative">
-                  <JerseySVG />
-                  {/* Número del jugador */}
-                  <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-xl">
-                    {'?'}
+            {formation.positions.map((position, index) => {
+              const player = players.find(
+                (player) => player.position === position.name
+              )
+              return (
+                <div
+                  key={position.name}
+                  className="absolute flex flex-col items-center"
+                  style={{ top: `${position.y}%`, left: `${position.x}%` }}
+                >
+                  {/* Camiseta SVG */}
+                  <div className="relative">
+                    <JerseySVG />
+                    {/* Número del jugador */}
+                    <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-xl">
+                      {player?.number ?? '?'}
+                    </div>
+                  </div>
+                  {/* Nombre del jugador */}
+                  <div className="text-white text-sm font-semibold text-center">
+                    {player?.name ?? 'Sin asignar'}
                   </div>
                 </div>
-                {/* Nombre del jugador */}
-                <div className="text-white text-sm font-semibold text-center">
-                  {position.name}
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
 
           {/* Nombre del entrenador */}
