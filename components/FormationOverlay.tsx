@@ -10,7 +10,7 @@ export const FormationOverlay = () => {
   const teamName = teamHome.name
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full font-['Roboto_Condensed']">
       {/* Nombre del equipo */}
 
       <div className="grid grid-cols-3 grid-rows-1 gap-4">
@@ -61,7 +61,7 @@ export const FormationOverlay = () => {
                     </div>
                   </div>
                   {/* Nombre del jugador */}
-                  <div className="text-white text-sm font-semibold text-center">
+                  <div className="text-black text-sm font-semibold text-center">
                     {player?.name ?? 'Sin asignar'}
                   </div>
                 </div>
