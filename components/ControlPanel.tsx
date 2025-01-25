@@ -13,9 +13,18 @@ import './styles.scss';
 import { useTimeStore } from "@/store/useTime"
 
 export function ControlPanel() {
-  const { time, updateTime } = useTimeStore()
+  const { time, updateTime, period, pauseMatch } = useTimeStore()
+  const activePeriod = period.find((p) => p.active)?.name || '1st Half'
 
   const updateMatchTime = useCallback(() => {
+    if (time.seconds + 1 >= 60 && time.minutes + 1 >= (45 + time.stoppage) && activePeriod === '1st Half') {
+      pauseMatch()
+    }
+
+    if (time.seconds + 1 >= 60 && time.minutes + 1 >= (90 + time.stoppage) && activePeriod === '2nd Half') {
+      pauseMatch()
+    }
+
     if (time.seconds + 1 >= 60) {
       updateTime({
         minutes: time.minutes + 1,

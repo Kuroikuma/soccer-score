@@ -6,7 +6,7 @@ const initialState: TimeState = {
   time: {
     minutes: 0,
     seconds: 0,
-    stoppage: 0,
+    stoppage: 3,
     isRunning: false,
   },
   period: [

@@ -4,7 +4,17 @@ import { useTeamStore } from "./useTeam"
 
 
 const initialState: EventState = {
-  events: [],
+  events: [
+    {
+      id: "1",
+      type: "yellowCard",
+      minute: 0,
+      teamId: "home",
+      playerId: "1",
+      assistById: "",
+      replacedById: "",
+    }
+  ],
   overlay: {
     enabled: true,
     horizontalPosition: 0,
@@ -45,13 +55,7 @@ export const useEventStore = create<MatchEventStore>((set, get) => ({
                   ? useTeamStore.getState().homeTeam.score + 1
                   : useTeamStore.getState().awayTeam.score + 1,
             })
-        : // {
-          //   [eventData.teamId === "home" ? "homeTeam" : "awayTeam"]: {
-          //     ...state[eventData.teamId === "home" ? "homeTeam" : "awayTeam"],
-          //     score: state[eventData.teamId === "home" ? "homeTeam" : "awayTeam"].score + 1,
-          //   },
-          // }
-          {}),
+        : {}),
     })),
   removeEvent: (eventId) =>
     set((state) => ({
