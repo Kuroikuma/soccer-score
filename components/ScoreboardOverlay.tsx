@@ -5,6 +5,7 @@ import { ChevronUp } from "lucide-react"
 import { useTeamStore } from "@/store/useTeam"
 import { useTimeStore } from "@/store/useTime"
 import { useEventStore } from "@/store/useEvent"
+import STActivoSVG from "./svg/logo-st-activo"
 
 interface EventNotification {
   id: string
@@ -50,40 +51,44 @@ export function ScoreboardOverlay() {
   }, [events, homeTeam, awayTeam])
 
   return (
-    <div className="relative">
-      <div className="max-w-5xl mx-auto">
+    <div className="relative font-['Roboto_Condensed']">
+      <div className="w-[40vw]">
         <div className="relative">
           {/* Main Scoreboard */}
-          <div className="grid grid-cols-[1fr,auto,1fr,auto] items-stretch bg-black text-white">
+          <div className="flex items-stretch text-white">
+            {/* Time */}
+            <STActivoSVG />
+            <div className="flex items-center justify-center bg-white text-2xl font-bold px-4 " style={{color: "#00003d"}}>
+              {formatTime(time.minutes, time.seconds)}
+            </div>
             {/* Home Team */}
-            <div className="flex items-center bg-[#F7A74A] p-2">
-              <img
-                src={homeTeam.logo || "/placeholder.svg"}
-                alt={homeTeam.name}
-                className="h-8 w-8 mr-2 object-contain"
-              />
+           <div className="flex bg-[#16348c]">
+            <div className="flex flex-col h-full w-3">
+              <div className={`h-[50%] w-full`} style={{background: homeTeam.primaryColor}}></div>
+              <div className={`h-[50%] w-full`} style={{background: homeTeam.secondaryColor}}></div>
+            </div>
+            <div className="flex items-center p-2 pl-4 pr-8 border-l-2 border-[#0a41f6]" style={{background: "linear-gradient(90deg, rgba(0,7,85,1) 0%, rgba(0,44,198,1) 100%)", clipPath: "polygon(90% 0, 100% 50%, 90% 100%, 0 100%, 0 0)"}}>
               <span className="font-bold text-xl">{homeTeam.name}</span>
             </div>
 
             {/* Score */}
-            <div className="flex items-center justify-center bg-white text-black px-6 text-3xl font-bold">
+            <div className="flex items-center justify-center text-white px-6 text-3xl font-bold">
               {homeTeam.score}
             </div>
 
-            {/* Away Team */}
-            <div className="flex items-center bg-[#C41E3A] p-2">
-              <img
-                src={awayTeam.logo || "/placeholder.svg"}
-                alt={awayTeam.name}
-                className="h-8 w-8 mr-2 object-contain"
-              />
-              <span className="font-bold text-xl">{awayTeam.name}</span>
+            <div className="flex items-center justify-center text-white px-6 text-3xl font-bold border-l-2 border-[#0a41f6]">
+              {awayTeam.score}
             </div>
 
-            {/* Time */}
-            <div className="flex items-center justify-center bg-gray-200 text-black px-6 text-2xl font-bold">
-              {formatTime(time.minutes, time.seconds)}
+            {/* Away Team */}
+            <div className="flex items-center p-2 pr-4 pl-8 border-r-2 border-[#0a41f6]" style={{background: "linear-gradient(90deg, rgba(0,44,198,1) 0%, rgba(0,7,85,1) 100%)", clipPath:"polygon(100% 0, 100% 100%, 10% 100%, 0 50%, 10% 0)"}}>
+              <span className="font-bold text-xl">{awayTeam.name}</span>
             </div>
+            <div className="flex flex-col h-full w-3">
+              <div className={`h-[50%] w-full`} style={{background: awayTeam.primaryColor}}></div>
+              <div className={`h-[50%] w-full`} style={{background: awayTeam.secondaryColor}}></div>
+            </div>
+           </div>
           </div>
 
           {/* Event Display */}

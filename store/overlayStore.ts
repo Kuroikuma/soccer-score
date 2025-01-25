@@ -3,8 +3,8 @@ import { create } from "zustand"
 
 
 let __initOverlays__ = {
-  x: 0,
-  y: 0,
+  x: 50,
+  y: 5,
   scale: 100,
   visible: false,
 };
