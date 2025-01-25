@@ -52,7 +52,7 @@ export function ScoreboardOverlay() {
 
   return (
     <div className="relative font-['Roboto_Condensed']">
-      <div className="w-[40vw]">
+      <div className="w-[50vw]">
         <div className="relative">
           {/* Main Scoreboard */}
           <div className="flex items-stretch text-white">
