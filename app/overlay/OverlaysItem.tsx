@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { IOverlays } from '@/store/interfaces'
 import { useOverlaysStore } from '@/store/overlayStore'
-import socket from '@/services/socket'
+// import socket from '@/services/socket'
 import { ScoreboardOverlay } from '@/components/overlays/ScoreboardOverlay'
 import { FormationOverlay } from '@/components/overlays/FormationOverlay'
 import GoalsDownOverlay from '@/components/overlays/GoalsDownOverlay'
@@ -33,37 +33,37 @@ export const OverlaysItem = ({ item, gameId }: IOverlaysItemProps) => {
   const { handlePositionOverlay, handleVisibleOverlay, handleScaleOverlay } =
     useOverlaysStore()
 
-  useEffect(() => {
-    const eventName = `server:handlePositionOverlay/${gameId}/${item.id}`
-    const eventNameScale = `server:handleScaleOverlay/${gameId}/${item.id}`
-    const eventNameVisible = `server:handleVisibleOverlay/${gameId}/${item.id}`
+  // useEffect(() => {
+  //   const eventName = `server:handlePositionOverlay/${gameId}/${item.id}`
+  //   const eventNameScale = `server:handleScaleOverlay/${gameId}/${item.id}`
+  //   const eventNameVisible = `server:handleVisibleOverlay/${gameId}/${item.id}`
 
-    const handlePosition = (imagesSocket: ISocketPosition) => {
-      handlePositionOverlay(
-        item.id,
-        { x: imagesSocket.x, y: imagesSocket.y },
-        false
-      )
-    }
+  //   const handlePosition = (imagesSocket: ISocketPosition) => {
+  //     handlePositionOverlay(
+  //       item.id,
+  //       { x: imagesSocket.x, y: imagesSocket.y },
+  //       false
+  //     )
+  //   }
 
-    const handleScale = (imagesSocket: ISocketScale) => {
-      handleScaleOverlay(item.id, imagesSocket.scale, false)
-    }
+  //   const handleScale = (imagesSocket: ISocketScale) => {
+  //     handleScaleOverlay(item.id, imagesSocket.scale, false)
+  //   }
 
-    const handleVisible = (imagesSocket: ISocketVisible) => {
-      handleVisibleOverlay(item.id, imagesSocket.visible, false)
-    }
+  //   const handleVisible = (imagesSocket: ISocketVisible) => {
+  //     handleVisibleOverlay(item.id, imagesSocket.visible, false)
+  //   }
 
-    socket.on(eventName, handlePosition)
-    socket.on(eventNameScale, handleScale)
-    socket.on(eventNameVisible, handleVisible)
+  //   socket.on(eventName, handlePosition)
+  //   socket.on(eventNameScale, handleScale)
+  //   socket.on(eventNameVisible, handleVisible)
 
-    return () => {
-      socket.off(eventName, handlePosition)
-      socket.off(eventNameScale, handleScale)
-      socket.off(eventNameVisible, handleVisible)
-    }
-  }, [gameId, item.id])
+  //   return () => {
+  //     socket.off(eventName, handlePosition)
+  //     socket.off(eventNameScale, handleScale)
+  //     socket.off(eventNameVisible, handleVisible)
+  //   }
+  // }, [gameId, item.id])
 
   return item.id === 'scoreboardUp' ? (
     <ScoreboardOverlay />

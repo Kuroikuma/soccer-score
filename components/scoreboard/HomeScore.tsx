@@ -1,4 +1,5 @@
 import { useTeamStore } from '@/store/useTeam'
+import ArrowCircleLeft from '../svg/ArrowCircleLeft'
 
 export function HomeScore() {
   const { homeTeam } = useTeamStore()
@@ -15,14 +16,13 @@ export function HomeScore() {
         ></div>
       </div>
       <div
-        className="flex items-center p-2 pl-4 pr-8 border-l-2 border-[#0a41f6]"
-        style={{
-          background:
-            'linear-gradient(90deg, rgba(0,7,85,1) 0%, rgba(0,44,198,1) 100%)',
-          clipPath: 'polygon(90% 0, 100% 50%, 90% 100%, 0 100%, 0 0)',
-        }}
+        className="flex items-center p-2 pl-4 pr-8"
       >
         <span className="font-bold text-xl">{homeTeam.name}</span>
+      </div>
+
+      <div className="flex items-center justify-center">
+        <ArrowCircleLeft className="text-white" />
       </div>
 
       {/* Score */}

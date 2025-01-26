@@ -3,7 +3,7 @@ import { useTeamStore } from '@/store/useTeam'
 import { useTimeStore } from '@/store/useTime'
 import { useState, useEffect } from 'react'
 
-interface EventGoal {
+export interface EventGoal {
   logo: string
   playerName: string
   goalMessage: string
@@ -62,8 +62,7 @@ const GoalsDownOverlay = () => {
         <div
           className="h-[50%] w-full flex justify-center items-center"
           style={{
-            background:
-              'linear-gradient(90deg, rgba(0,7,85,1) 0%, rgba(0,44,198,1) 100%)',
+            background: `linear-gradient(to right, rgb(32, 0, 199) 0%, rgb(14, 0, 95) 40%, rgb(14, 0, 95) 60%, rgb(32, 0, 199) 100%)`,
           }}
         >
           <span className="text-white text-center text-2xl font-bold">

@@ -13,14 +13,14 @@ export function ScoreboardOverlay() {
           {/* Main Scoreboard */}
           <div className="flex items-stretch text-white">
             <div>
-              <div className="bg-[#002cc6]">
+              <div className="bg-[#162cf8]">
                 <STActivoSVG />
               </div>
               <div className="h-[50px]"></div>
             </div>
 
             <Time />
-            <div className="flex flex-col items-center justify-center gap-1">
+            <div className="flex flex-col items-center justify-center gap-1 pl-2">
               <Score />
               <EventMatch />
             </div>

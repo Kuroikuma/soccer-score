@@ -5,8 +5,60 @@ import { useTeamStore } from "./useTeam"
 
 const initialState: EventState = {
   events: [
+    
     {
       id: "1",
+      type: "substitution",
+      minute: 5,
+      teamId: "away",
+      playerId: "1",
+      assistById: "1",
+      replacedById: "2",
+    },
+    {
+      id: "2",
+      type: "goal",
+      minute: 5,
+      teamId: "home",
+      playerId: "1",
+    },
+    {
+      id: "3",
+      type: "goal",
+      minute: 6,
+      teamId: "away",
+      playerId: "2",
+    },
+    {
+      id: "4",
+      type: "goal",
+      minute: 5,
+      teamId: "home",
+      playerId: "1",
+    },
+    {
+      id: "5",
+      type: "goal",
+      minute: 6,
+      teamId: "away",
+      playerId: "2",
+    },
+    {
+      id: "6",
+      type: "goal",
+      minute: 5,
+      teamId: "home",
+      playerId: "1",
+    },
+    {
+      id: "7",
+      type: "goal",
+      minute: 6,
+      teamId: "away",
+      playerId: "2",
+    },
+    {
+      id: "8",
       type: "substitution",
       minute: 5,
       teamId: "home",

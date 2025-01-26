@@ -9,8 +9,7 @@ export function CardPlayers({ notification }: CardPlayersProps) {
     <div
       className="flex relative items-center w-full h-[50px] border-t-2"
       style={{
-        background:
-          'linear-gradient(90deg, rgba(0,7,85,1) 0%, rgba(0,44,198,1) 100%)',
+        background:`linear-gradient(to right, rgb(32, 0, 199) 0%, rgb(14, 0, 95) 40%, rgb(14, 0, 95) 60%, rgb(32, 0, 199) 100%)`,
       }}
     >
       <div
