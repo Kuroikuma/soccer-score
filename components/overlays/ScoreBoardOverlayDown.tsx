@@ -8,12 +8,12 @@ const ScoreBoardDown = () => {
         <img
           src="/logoEquipo.png"
           alt="Logo"
-          className="h-[90%] w-full object-contain"
+          className="h-[15vh] w-full object-contain"
         />
       </div>
 
       <div className="flex flex-col h-[100%]">
-        <div className="min-h-[50%] bg-[rgba(0,7,85,.8)] w-full flex justify-center items-center">
+        <div className="min-h-[50%] bg-[rgba(0,7,85,.8)] w-full flex justify-center items-center py-2">
           <div className="flex flex-col items-start justify-center w-[50%] pl-[10%]">
             <span className="text-white text-sm font-bold">9' GOAL !!!!!!</span>
             <span className="text-white text-sm font-bold">9' GOAL !!!!!!</span>
@@ -45,7 +45,7 @@ const ScoreBoardDown = () => {
               clipPath: 'polygon(95% 0, 100% 50%, 95% 100%, 0 100%, 0 0)',
             }}
           >
-            <span className="font-bold text-4xl">{homeTeam.name}</span>
+            <span className="font-bold text-3xl">{homeTeam.name}</span>
           </div>
 
           {/* Score */}
@@ -66,7 +66,7 @@ const ScoreBoardDown = () => {
               clipPath: 'polygon(100% 0, 100% 100%, 5% 100%, 0 50%, 5% 0)',
             }}
           >
-            <span className="font-bold text-4xl">{awayTeam.name}</span>
+            <span className="font-bold text-3xl">{awayTeam.name}</span>
           </div>
         </div>
       </div>
@@ -75,7 +75,7 @@ const ScoreBoardDown = () => {
         <img
           src="/LogoAway.png"
           alt="Logo"
-          className="h-[90%] w-full object-contain"
+          className="h-[15vh] w-full object-contain"
         />
       </div>
     </div>
