@@ -5,7 +5,7 @@ import { useTimeStore } from '@/store/useTime'
 import { ChevronUp } from 'lucide-react'
 
 export interface EventNotification {
-  type: 'yellowCard' | 'redCard',
+  type: 'yellowCard' | 'redCard' | 'goal',
   minute: number,
   logo: string,
   playerName: string,

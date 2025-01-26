@@ -1,9 +1,9 @@
 import { useTeamStore } from '@/store/useTeam'
-import FormationSVG from './svg/formation'
-import JerseySVG from './svg/jersey'
-import PlayerPlate from './formation/PlayerPlate'
-import TeamPlate from './formation/TeamPlate'
-import ManagerPlate from './formation/ManagerPlate'
+import FormationSVG from '../svg/formation'
+import JerseySVG from '../svg/jersey'
+import PlayerPlate from '../formation/PlayerPlate'
+import TeamPlate from '../formation/TeamPlate'
+import ManagerPlate from '../formation/ManagerPlate'
 
 export const FormationOverlay = () => {
   const formation = useTeamStore((state) => state.homeTeam.formation)

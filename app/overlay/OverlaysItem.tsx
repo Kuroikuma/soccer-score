@@ -3,8 +3,9 @@ import { useEffect } from 'react'
 import { IOverlays } from '@/store/interfaces'
 import { useOverlaysStore } from '@/store/overlayStore'
 import socket from '@/services/socket'
-import { ScoreboardOverlay } from '@/components/ScoreboardOverlay'
-import { FormationOverlay } from '@/components/FormationOverlay'
+import { ScoreboardOverlay } from '@/components/overlays/ScoreboardOverlay'
+import { FormationOverlay } from '@/components/overlays/FormationOverlay'
+import GoalsDownOverlay from '@/components/overlays/GoalsDownOverlay'
 
 
 interface IOverlaysItemProps {
@@ -65,11 +66,13 @@ export const OverlaysItem = ({ item, gameId }: IOverlaysItemProps) => {
     }
   }, [gameId, item.id])
 
-  return item.id === 'scoreboard' ? (
+  return item.id === 'scoreboardUp' ? (
     <ScoreboardOverlay />
   ) : item.id === 'formation' ? (
     // <FormationOverlay />
     <></>
+  ) : item.id === 'goalsDown' ? (
+    <GoalsDownOverlay />
   ) : <></>
 }
 

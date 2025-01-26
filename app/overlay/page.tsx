@@ -44,15 +44,16 @@ export default function OverlayPage() {
   const [gameId, setGameId] = useState<string | null>(id)
 
   const {
-    scoreboardOverlay,
+    scoreboardUpOverlay,
     formationOverlay,
+    goalsDownOverlay,
     handlePositionOverlay,
   } = useOverlaysStore()
 
   const overlays = [
     formationOverlay,
-    scoreboardOverlay,
-   
+    scoreboardUpOverlay,
+    goalsDownOverlay
   ]
 
   const [mounted, setMounted] = useState(false)

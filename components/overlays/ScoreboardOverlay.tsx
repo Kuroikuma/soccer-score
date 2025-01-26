@@ -1,9 +1,9 @@
 'use client'
 
-import STActivoSVG from './svg/logo-st-activo'
-import { Time } from './scoreboard/Time'
-import { Score } from './scoreboard/Score'
-import { EventMatch } from './scoreboard/EventMatch'
+import STActivoSVG from '../svg/logo-st-activo'
+import { Time } from '../scoreboard/Time'
+import { Score } from '../scoreboard/Score'
+import { EventMatch } from '../scoreboard/EventMatch'
 
 export function ScoreboardOverlay() {
   return (
@@ -12,13 +12,18 @@ export function ScoreboardOverlay() {
         <div className="relative">
           {/* Main Scoreboard */}
           <div className="flex items-stretch text-white">
-            
+            <div>
+              <div className="bg-[#002cc6]">
+                <STActivoSVG />
+              </div>
+              <div className="h-[50px]"></div>
+            </div>
+
+            <Time />
             <div className="flex flex-col items-center justify-center gap-1">
               <Score />
               <EventMatch />
             </div>
-            <Time />
-            <STActivoSVG />
           </div>
         </div>
       </div>

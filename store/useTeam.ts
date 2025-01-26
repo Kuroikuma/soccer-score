@@ -43,7 +43,7 @@ const initialState: TeamState = {
       },
       {
         id: "2",
-        name: "K. Walker",
+        name: "Junior Hurtado",
         number: 2,
         position: "RB",
       },

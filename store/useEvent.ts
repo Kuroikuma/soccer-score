@@ -13,7 +13,16 @@ const initialState: EventState = {
       playerId: "1",
       assistById: "",
       replacedById: "",
-    }
+    },
+    {
+      id: "2",
+      type: "goal",
+      minute: 5,
+      teamId: "home",
+      playerId: "2",
+      assistById: "",
+      replacedById: "",
+    },
   ],
   overlay: {
     enabled: true,

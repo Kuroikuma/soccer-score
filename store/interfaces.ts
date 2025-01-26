@@ -136,8 +136,9 @@ export interface TimeState {
 }
 
 export interface OverlayState {
-  scoreboardOverlay: IOverlays
+  scoreboardUpOverlay: IOverlays
   formationOverlay: IOverlays
+  goalsDownOverlay: IOverlays
 }
 export interface TeamState {
   homeTeam: Team
