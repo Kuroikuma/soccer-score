@@ -1,4 +1,6 @@
 import { EventNotification } from './EventMatch'
+import { ChevronDown, ChevronUp } from 'lucide-react'
+
 
 interface EventSubstitutionProps {
   notification: EventNotification
@@ -25,7 +27,7 @@ const EventSubstitution = ({ notification }: EventSubstitutionProps) => {
       </div>
       <div className="flex flex-col h-[100%] w-full">
         <div
-          className="h-[50%] w-full flex justify-center items-center"
+          className="h-[50%] w-full flex justify-between items-center pl-[20%] pr-2"
           style={{
             background:
               'linear-gradient(90deg, rgba(0,7,85,1) 0%, rgba(0,44,198,1) 100%)',
@@ -34,11 +36,13 @@ const EventSubstitution = ({ notification }: EventSubstitutionProps) => {
           <span className="text-white text-center text-2xl font-bold">
             {notification.substitute}
           </span>
+          <ChevronUp strokeWidth={4} className="h-8 w-8 font-bold text-green-400 " />
         </div>
-        <div className="h-[50%] bg-[rgba(0,7,85,.8)] w-full flex justify-center items-center">
+        <div className="h-[50%] bg-[rgba(0,7,85,.8)] w-full flex justify-between items-center pl-[20%] pr-2">
           <span className="text-white text-2xl font-bold">
             {notification.replacement}
           </span>
+          <ChevronDown strokeWidth={4} className="h-8 w-8 font-bold text-red-600 " />
         </div>
       </div>
     </div>
