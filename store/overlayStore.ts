@@ -13,6 +13,7 @@ const initialState: OverlayState = {
   scoreboardUpOverlay: {...__initOverlays__, id: "scoreboardUp"},
   formationOverlay: {...__initOverlays__, id: "formation"},
   goalsDownOverlay: {...__initOverlays__, id: "goalsDown"},
+  scoreBoardDownOverlay: {...__initOverlays__, id: "scoreBoardDown"},
 }
 
 interface OverlaysStore extends OverlayState {

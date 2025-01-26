@@ -139,6 +139,7 @@ export interface OverlayState {
   scoreboardUpOverlay: IOverlays
   formationOverlay: IOverlays
   goalsDownOverlay: IOverlays
+  scoreBoardDownOverlay: IOverlays
 }
 export interface TeamState {
   homeTeam: Team
