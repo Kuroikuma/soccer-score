@@ -3,12 +3,17 @@ import { useEventStore } from '@/store/useEvent'
 import { useTeamStore } from '@/store/useTeam'
 import { useTimeStore } from '@/store/useTime'
 import { ChevronUp } from 'lucide-react'
+import { CardPlayers } from './CardsPlayers'
+import EventSubstitution from './EventSubstitution'
+import { formatName } from '@/lib/utils'
 
 export interface EventNotification {
-  type: 'yellowCard' | 'redCard' | 'goal',
-  minute: number,
-  logo: string,
-  playerName: string,
+  type: 'yellowCard' | 'redCard' | 'substitution'
+  minute: number
+  logo: string
+  playerName: string
+  substitute?: string
+  replacement?: string
 }
 
 export function EventMatch() {
@@ -23,18 +28,32 @@ export function EventMatch() {
     if (events.length > 0) {
       const latestEvent = events[events.length - 1]
 
-      if (latestEvent.type === 'yellowCard' || latestEvent.type === 'redCard') {
-
+      if (
+        latestEvent.type === 'yellowCard' ||
+        latestEvent.type === 'redCard' ||
+        latestEvent.type === 'substitution'
+      ) {
         const team = latestEvent.teamId === 'home' ? homeTeam : awayTeam
         const player = team.players.find((p) => p.id === latestEvent.playerId)
 
+        const substitute = team.players.find(
+          (p) => p.id === latestEvent.assistById
+        )
+        const replacement = team.players.find(
+          (p) => p.id === latestEvent.replacedById
+        )
+
         if (player) {
-          const message = `${player.number} ${player.name}`
           const notification: EventNotification = {
             type: latestEvent.type,
             minute: latestEvent.minute,
             logo: team.logo ?? '/placeholder.svg',
-            playerName: player.name,
+            playerName: formatName(player.name),
+          }
+
+          if (latestEvent.type === 'substitution') {
+            notification.substitute = formatName(substitute.name)
+            notification.replacement = formatName(replacement.name)
           }
 
           setNotification(notification)
@@ -44,39 +63,16 @@ export function EventMatch() {
           //   setNotification(null)
           // }, 5000)
         }
-        
       }
     }
   }, [events, homeTeam, awayTeam])
 
   return (
-    <div
-      className="flex relative items-center w-full h-[50px] border-t-2"
-      style={{
-        // borderColor: 'linear-gradient(90deg, #0534da 0%, #4bded8 100%)',
-        background:
-          'linear-gradient(90deg, rgba(0,7,85,1) 0%, rgba(0,44,198,1) 100%)',
-      }}
-    >
-      <div
-        className="absolute -top-[2px] left-0 right-0 h-[2px]"
-        style={{
-          background: 'linear-gradient(90deg, #0534da 0%, #4bded8 100%)',
-        }}
-      ></div>
-      {notification && (
-        
-          <div className="flex justify-between w-full items-center pr-4">
-            <div className=" text-xl font-bold">
-              <img src="/logoEquipo.png" alt="Logo" className="h-12 w-full object-contain" />
-            </div>
-            <div className="text-xl">
-              {notification.playerName}
-            </div>
-            {notification.type === 'yellowCard' ? <div className='bg-yellow-500 h-9 w-6'></div> : <div className='bg-red-500'></div>}
-          </div>
-       
-      )}
-    </div>
+    notification &&
+    (notification.type === 'substitution' ? (
+      <EventSubstitution notification={notification} />
+    ) : (
+      <CardPlayers notification={notification} />
+    ))
   )
 }

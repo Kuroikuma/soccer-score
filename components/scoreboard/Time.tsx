@@ -14,14 +14,14 @@ export function Time() {
   return (
     <div className="flex flex-col items-end justify-start gap-1">
       <div
-        className="flex items-center h-[50%] justify-center bg-white text-2xl font-bold px-4 "
+        className="flex items-center h-[50px] justify-center bg-white text-2xl font-bold px-4 "
         style={{ color: '#00003d' }}
       >
         {formatTime(time.minutes, time.seconds)}
       </div>
       {time.stoppage > 0 && (
         <div
-          className="flex items-center h-[50px] bg-white text-2xl px-3 font-bold"
+          className="flex items-center flex-1 h-[50%] bg-white text-2xl px-3 font-bold"
           style={{ color: '#00003d' }}
         >
           +{time.stoppage}

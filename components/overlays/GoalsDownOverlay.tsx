@@ -44,9 +44,7 @@ const GoalsDownOverlay = () => {
   }, [events, homeTeam, awayTeam])
 
   return (
-    <div
-      className="relative font-['Roboto_Condensed'] w-[50vw] h-[15vh]"
-    >
+    <div className="relative font-['Roboto_Condensed'] w-[50vw] h-[15vh]">
       <div
         className="absolute -top-[4px] left-0 right-0 h-[4px]"
         style={{
@@ -72,9 +70,7 @@ const GoalsDownOverlay = () => {
             {notification?.playerName}
           </span>
         </div>
-        <div
-          className="h-[50%] bg-[rgba(0,7,85,1)] w-full flex justify-center items-center"
-        >
+        <div className="h-[50%] bg-[rgba(0,7,85,.9)] w-full flex justify-center items-center">
           <span className="text-white text-2xl font-bold">
             {notification?.goalMessage}
           </span>

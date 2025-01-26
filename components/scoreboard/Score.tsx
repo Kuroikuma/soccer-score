@@ -3,7 +3,7 @@ import { HomeScore } from './HomeScore'
 
 export function Score() {
   return (
-    <div className="flex h-[50%] bg-[#16348c]">
+    <div className="flex h-[50px] bg-[#16348c]">
       <HomeScore />
 
       <AwayScore />

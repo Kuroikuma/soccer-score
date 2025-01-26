@@ -72,7 +72,8 @@ export const OverlaysItem = ({ item, gameId }: IOverlaysItemProps) => {
     // <FormationOverlay />
     <></>
   ) : item.id === 'goalsDown' ? (
-    <GoalsDownOverlay />
+    // <GoalsDownOverlay />
+    <></>
   ) : <></>
 }
 

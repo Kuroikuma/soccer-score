@@ -7,21 +7,12 @@ const initialState: EventState = {
   events: [
     {
       id: "1",
-      type: "yellowCard",
-      minute: 0,
-      teamId: "home",
-      playerId: "1",
-      assistById: "",
-      replacedById: "",
-    },
-    {
-      id: "2",
-      type: "goal",
+      type: "substitution",
       minute: 5,
       teamId: "home",
       playerId: "2",
-      assistById: "",
-      replacedById: "",
+      assistById: "2",
+      replacedById: "1",
     },
   ],
   overlay: {

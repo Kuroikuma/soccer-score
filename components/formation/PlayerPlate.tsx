@@ -1,3 +1,5 @@
+import { formatName } from "@/lib/utils"
+
 interface PlayerPlateProps {
   number: number
   name: string
@@ -18,7 +20,7 @@ export default function PlayerPlate({ number, name, primaryColor, secondaryColor
 
       {/* Name Container */}
       <div className="flex h-10 flex-1 items-center pl-6 border-l-slate-800 border-l-2 skew-x-12 border-r-8" style={{backgroundColor: primaryColor, borderRightColor: secondaryColor}}>
-        <span className="font-bold uppercase tracking-wide -skew-x-12" style={{color: secondaryColor}}>{name}</span>
+        <span className="font-bold uppercase tracking-wide -skew-x-12" style={{color: secondaryColor}}>{formatName(name)}</span>
       </div>
     </div>
   )
