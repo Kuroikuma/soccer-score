@@ -10,10 +10,10 @@ let __initOverlays__ = {
 };
 
 const initialState: OverlayState = {
-  scoreboardUpOverlay: {...__initOverlays__, id: "scoreboardUp"},
+  scoreboardUpOverlay: {...__initOverlays__, id: "scoreboardUp", y:5, x:10},
   formationOverlay: {...__initOverlays__, id: "formation"},
-  goalsDownOverlay: {...__initOverlays__, id: "goalsDown"},
-  scoreBoardDownOverlay: {...__initOverlays__, id: "scoreBoardDown"},
+  goalsDownOverlay: {...__initOverlays__, id: "goalsDown", y: 75},
+  scoreBoardDownOverlay: {...__initOverlays__, id: "scoreBoardDown", y: 45},
 }
 
 interface OverlaysStore extends OverlayState {

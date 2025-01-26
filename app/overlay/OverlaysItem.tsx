@@ -66,14 +66,12 @@ export const OverlaysItem = ({ item, gameId }: IOverlaysItemProps) => {
   }, [gameId, item.id])
 
   return item.id === 'scoreboardUp' ? (
-    // <ScoreboardOverlay />
-    <></>
+    <ScoreboardOverlay />
   ) : item.id === 'formation' ? (
     // <FormationOverlay />
     <></>
   ) : item.id === 'goalsDown' ? (
-    // <GoalsDownOverlay />
-    <></>
+    <GoalsDownOverlay />
   ) : item.id === 'scoreBoardDown' ? (
     <ScoreBoardDown />
   ) : (
