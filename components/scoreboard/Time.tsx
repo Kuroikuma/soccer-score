@@ -12,7 +12,7 @@ export function Time() {
   }
 
   return (
-    <div className="flex flex-col items-end justify-start gap-1">
+    <div className="flex flex-col items-start justify-start gap-1">
       <div
         className="flex items-center h-[50%] justify-center bg-white text-2xl font-bold px-4 "
         style={{ color: '#00003d' }}
