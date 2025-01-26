@@ -53,7 +53,7 @@ const GoalsDownOverlay = () => {
           background: 'linear-gradient(90deg, #0534da 0%, #4bded8 100%)',
         }}
       ></div>
-      <div className=" text-xl font-bold absolute top-0 -left-16 flex items-center h-[100%]">
+      <div className=" text-xl font-bold absolute top-0 -left-[5%] flex items-center h-[100%]">
         <img
           src="/logoEquipo.png"
           alt="Logo"

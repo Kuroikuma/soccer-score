@@ -3,8 +3,8 @@ import { create } from "zustand"
 
 
 let __initOverlays__ = {
-  x: 50,
-  y: 5,
+  x: 20,
+  y: 75,
   scale: 100,
   visible: false,
 };
@@ -12,7 +12,7 @@ let __initOverlays__ = {
 const initialState: OverlayState = {
   scoreboardUpOverlay: {...__initOverlays__, id: "scoreboardUp"},
   formationOverlay: {...__initOverlays__, id: "formation"},
-  goalsDownOverlay: {...__initOverlays__, id: "goalsDown", y: 75, x: 500},
+  goalsDownOverlay: {...__initOverlays__, id: "goalsDown"},
 }
 
 interface OverlaysStore extends OverlayState {

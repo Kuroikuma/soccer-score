@@ -65,6 +65,7 @@ export default function OverlayPage() {
   const handleDragStop = useCallback(
     (id: string, data: { x: number; y: number }) => {
       data.y = parseFloat(((data.y / window.innerHeight) * 100).toFixed(2));
+      data.x = parseFloat(((data.x / window.innerWidth) * 100).toFixed(2));
       handlePositionOverlay(id, data)
     },
     []
@@ -78,10 +79,11 @@ export default function OverlayPage() {
     <div className="relative w-screen h-[calc(100vh)] bg-[#1a472a00] overflow-hidden">
       {overlays.map((item) => {
         let y = (item.y / 100) * window.innerHeight
+        let x = (item.x / 100) * window.innerWidth
         return (
           <DraggableComponent
             key={item.id}
-            position={{ x: item.x, y: y }}
+            position={{ x: x, y: y }}
             // defaultPosition={{ x: item.x, y: item.y }} // Usa `defaultPosition` en lugar de `position`.
             onStop={(_: any, data: any) =>
               handleDragStop(item.id, { x: data.x, y: data.y })
