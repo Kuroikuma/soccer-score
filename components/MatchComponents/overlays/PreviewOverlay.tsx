@@ -23,15 +23,15 @@ const PreviewOverlay = () => {
         <div className="w-[100%] h-[40%]">
           <FenifutSVG height="100%" width="100%" />
         </div>
-        <div className="text-white text-center text-9xl font-bold absolute top-[50%]">VS</div>
+        <div className="text-white text-center text-6xl font-bold absolute top-[50%]">VS</div>
         <div className="text-white text-center text-2xl font-bold">CAMPO SINTETICO SAN CARLOS</div>
       </div>
 
       <div className="h-[70%] w-[40%]">
         <div className="w-[100%] h-[80%]">
-          <img src="/logoAway.png" alt="Logo" className="h-full w-full object-contain" />
+          <img src="/LogoAway.png" alt="Logo" className="h-full w-full object-contain" />
         </div>
-        <div className="text-white text-center text-2xl font-bold">
+        <div className="text-white text-center text-xl font-bold">
           TOROS DE CHONTALES FC
         </div>
       </div>
