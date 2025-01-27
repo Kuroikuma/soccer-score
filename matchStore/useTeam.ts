@@ -30,7 +30,7 @@ const initialState: TeamState = {
     score: 0,
     color: "#06c12",
     primaryColor:"#c2a770",
-    secondaryColor:"#252942",
+    secondaryColor:"",
     textColor: "#ffffff",
     logo: "/placeholder.svg",
     logoFit: "contain",

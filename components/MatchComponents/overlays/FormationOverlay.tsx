@@ -17,7 +17,7 @@ export const FormationOverlay = () => {
 
       <div className="grid grid-cols-3 grid-rows-1 gap-4">
         <div className="flex flex-col items-center justify-between pb-3">
-          <TeamPlate logo="/logoEquipo.svg" name={teamName} primaryColor={teamHome.primaryColor} secondaryColor={teamHome.secondaryColor} />
+          <TeamPlate logo="/logoEquipo.svg" name={teamName} primaryColor={teamHome.primaryColor} secondaryColor={teamHome.secondaryColor} textColor={teamHome.textColor} />
           <div className="flex flex-col gap-1">
             {players.map((player, index) => (
               <PlayerPlate
@@ -26,10 +26,11 @@ export const FormationOverlay = () => {
                 name={player.name}
                 primaryColor={teamHome.primaryColor}
                 secondaryColor={teamHome.secondaryColor}
+                textColor={teamHome.textColor}
               />
             ))}
           </div>
-          <ManagerPlate name={teamHome.staff.manager} primaryColor={teamHome.primaryColor} secondaryColor={teamHome.secondaryColor} />
+          <ManagerPlate textColor={teamHome.textColor} name={teamHome.staff.manager} primaryColor={teamHome.primaryColor} secondaryColor={teamHome.secondaryColor} />
         </div>
         <div className="col-span-2">
           {/* <div className="text-center text-white text-2xl font-bold mb-4">
