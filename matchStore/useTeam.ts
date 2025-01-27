@@ -104,10 +104,12 @@ const initialState: TeamState = {
     ],
     staff: defaultStaff,
     formation: defaultFormation,
-    teamRole: "home"
+    teamRole: "home",
+    shortName:"H"
   },
   awayTeam: {
     name: "Away Team",
+    shortName:"A",
     score: 0,
     color: "#b60218",
     textColor: "#ffffff",

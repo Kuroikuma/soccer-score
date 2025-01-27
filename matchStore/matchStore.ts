@@ -4,6 +4,9 @@ import { create } from 'zustand'
 const initialState: MatchState = {
   leagueLogo: '',
   leagueName: '',
+  stadiumName: '',
+  matchDate: '',
+  id: '',
 }
 
 interface MatchStore extends MatchState {}

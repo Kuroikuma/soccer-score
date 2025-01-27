@@ -61,6 +61,7 @@ export interface Substitution {
 
 export interface Team {
   name: string
+  shortName: string
   score: number
   color: string
   textColor: string
@@ -150,4 +151,7 @@ export interface TeamState {
 export interface MatchState {
   leagueName: string
   leagueLogo: string
+  stadiumName: string
+  matchDate: string
+  id: string
 }

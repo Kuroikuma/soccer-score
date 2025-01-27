@@ -38,6 +38,7 @@ const initialState: MatchState2 = {
     teamRole: "home",
     primaryColor: "",
     secondaryColor: "",
+    shortName:""
   },
   awayTeam: {
     name: "Away Team",
@@ -52,6 +53,7 @@ const initialState: MatchState2 = {
     teamRole: "away",
     primaryColor: "",
     secondaryColor: "",
+    shortName:""
   },
   events: [],
   time: {
