@@ -2,10 +2,10 @@ import { useEffect } from 'react'
 import { IOverlays } from '@/matchStore/interfaces'
 import { useOverlaysStore } from '@/matchStore/overlayStore'
 // import socket from '@/services/socket'
-import { ScoreboardOverlay } from '@/components/overlays/ScoreboardOverlay'
-import { FormationOverlay } from '@/components/overlays/FormationOverlay'
-import GoalsDownOverlay from '@/components/overlays/GoalsDownOverlay'
-import ScoreBoardDown from '@/components/overlays/ScoreBoardOverlayDown'
+import { ScoreboardOverlay } from '@/components/MatchComponents/overlays/ScoreboardOverlay'
+import { FormationOverlay } from '@/components/MatchComponents/overlays/FormationOverlay'
+import GoalsDownOverlay from '@/components/MatchComponents/overlays/GoalsDownOverlay'
+import ScoreBoardDown from '@/components/MatchComponents/overlays/ScoreBoardOverlayDown'
 
 interface IOverlaysItemProps {
   item: IOverlays

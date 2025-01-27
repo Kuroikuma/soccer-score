@@ -1,9 +1,9 @@
 "use client"
 
-import { ControlPanel } from "@/components/ControlPanel"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { MonitorPlay } from "lucide-react"
+import { ControlPanel } from "@/components/MatchComponents/ControlPanel"
 
 export default function Home() {
   return (

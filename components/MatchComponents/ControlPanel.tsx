@@ -3,14 +3,14 @@
 import { useEffect, useCallback } from "react"
 import { Tabs } from "@/components/ui/tabs"
 import { Card } from "@/components/ui/card"
-import { TabTeamSetup } from "./TeamManagement"
-import { TabMatchEvents } from "./MatchEventsAndSubs"
-import { TabControlPanel } from "./ControlPanel/TabControlPanel"
-import { TabContentScore } from "./ControlPanel/Score"
-import { TabContentMatchTime } from "./ControlPanel/TabContentMatchTime"
-import { TabTeamCustomize } from "./ControlPanel/TabTeamCustomize"
 import './styles.scss';
 import { useTimeStore } from "@/matchStore/useTime"
+import { TabControlPanel } from "./ControlPanel/TabControlPanel";
+import { TabContentScore } from "./ControlPanel/Score";
+import { TabContentMatchTime } from "./ControlPanel/TabContentMatchTime";
+import { TabTeamSetup } from "./TeamManagement";
+import { TabMatchEvents } from "./MatchEventsAndSubs";
+import { TabTeamCustomize } from "./ControlPanel/TabTeamCustomize";
 
 export function ControlPanel() {
   const { time, updateTime, period, pauseMatch } = useTimeStore()

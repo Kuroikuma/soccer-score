@@ -1,7 +1,7 @@
-import { TabsContent } from '../ui/tabs'
-import { Label } from '../ui/label'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
+import { TabsContent } from '../../ui/tabs'
+import { Label } from '../../ui/label'
+import { Input } from '../../ui/input'
+import { Button } from '../../ui/button'
 import { useTimeStore } from '@/matchStore/useTime'
 
 export function TabContentMatchTime() {

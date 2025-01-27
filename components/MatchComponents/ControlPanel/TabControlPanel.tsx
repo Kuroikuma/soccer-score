@@ -1,4 +1,4 @@
-import { TabsList, TabsTrigger } from '../ui/tabs'
+import { TabsList, TabsTrigger } from '../../ui/tabs'
 
 export function TabControlPanel() {
   return (

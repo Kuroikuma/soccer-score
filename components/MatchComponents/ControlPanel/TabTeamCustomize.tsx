@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import { TabsContent } from '../ui/tabs'
+import { TabsContent } from '../../ui/tabs'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select'
-import { Label } from '../ui/label'
-import { Input } from '../ui/input'
+} from '../../ui/select'
+import { Label } from '../../ui/label'
+import { Input } from '../../ui/input'
 import { useTeamStore } from '@/matchStore/useTeam'
 import { TeamRole } from '@/matchStore/interfaces'
 

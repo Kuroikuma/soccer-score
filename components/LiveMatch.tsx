@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useToast } from "@/hooks/use-toast"
-import { ScoreboardOverlay } from "./overlays/ScoreboardOverlay"
+import { ScoreboardOverlay } from "./MatchComponents/overlays/ScoreboardOverlay"
 import { useTeamStore } from "@/matchStore/useTeam"
 import { useTimeStore } from "@/matchStore/useTime"
 import { useEventStore } from "@/matchStore/useEvent"
