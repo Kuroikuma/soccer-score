@@ -48,6 +48,7 @@ export default function OverlayPage() {
     formationOverlay,
     goalsDownOverlay,
     scoreBoardDownOverlay,
+    previewOverlay,
     handlePositionOverlay,
   } = useOverlaysStore()
 
@@ -56,6 +57,7 @@ export default function OverlayPage() {
     scoreboardUpOverlay,
     goalsDownOverlay,
     scoreBoardDownOverlay,
+    previewOverlay,
   ]
 
   const [mounted, setMounted] = useState(false)

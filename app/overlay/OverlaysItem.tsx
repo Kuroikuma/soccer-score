@@ -6,6 +6,7 @@ import { ScoreboardOverlay } from '@/components/MatchComponents/overlays/Scorebo
 import { FormationOverlay } from '@/components/MatchComponents/overlays/FormationOverlay'
 import GoalsDownOverlay from '@/components/MatchComponents/overlays/GoalsDownOverlay'
 import ScoreBoardDown from '@/components/MatchComponents/overlays/ScoreBoardOverlayDown'
+import PreviewOverlay from '@/components/MatchComponents/overlays/PreviewOverlay'
 
 interface IOverlaysItemProps {
   item: IOverlays
@@ -72,12 +73,15 @@ export const OverlaysItem = ({ item, gameId }: IOverlaysItemProps) => {
     // <FormationOverlay />
     <></>
   ) : item.id === 'goalsDown' ? (
-    <GoalsDownOverlay />
+    // <GoalsDownOverlay />
+    <> </>
   ) : item.id === 'scoreBoardDown' ? (
-    <ScoreBoardDown />
-  ) : (
-    <></>
-  )
+    // <ScoreBoardDown />
+    <> </>
+  ) : item.id === 'preview' ? (
+    <PreviewOverlay />
+    // <></>
+  ) : <></>
 }
 
 const ScoreBoard = ({ item }: ScorebugProps) => {
