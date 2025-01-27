@@ -1,4 +1,4 @@
-import { Formation, MatchEvent, MatchState, Player, Staff, Substitution, Team, TeamRole } from "@/matchStore/interfaces"
+import { Formation, MatchEvent, MatchState2, Player, Staff, Substitution, Team, TeamRole } from "@/matchStore/interfaces"
 import { create } from "zustand"
 
 const defaultFormation: Formation = {
@@ -24,7 +24,7 @@ const defaultStaff: Staff = {
   physio: "",
 }
 
-const initialState: MatchState = {
+const initialState: MatchState2 = {
   homeTeam: {
     name: "Home Team",
     score: 0,
@@ -84,7 +84,7 @@ const initialState: MatchState = {
   substitutions: [],
 }
 
-interface MatchStore extends MatchState {
+interface MatchStore extends MatchState2 {
   addPlayer: (teamRole: TeamRole, player: Omit<Player, "id">) => void
   updateTeam: (team: TeamRole, updates: Partial<Team>) => void
   updateStaff: (team: TeamRole, updates: Partial<Staff>) => void
