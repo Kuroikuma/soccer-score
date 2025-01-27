@@ -24,7 +24,7 @@ const PreviewOverlay = () => {
           <FenifutSVG height="100%" width="100%" />
         </div>
         <div className="text-white text-center text-6xl font-bold absolute top-[50%]">VS</div>
-        <div className="text-white text-center text-2xl font-bold absolute top-[80%]">CAMPO SINTETICO SAN CARLOS</div>
+        <div className="text-white text-center text-2xl font-bold absolute top-[85%]">CAMPO SINTETICO SAN CARLOS</div>
       </div>
 
       <div className="h-[70%] w-[40%]">
