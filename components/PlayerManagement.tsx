@@ -6,8 +6,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
-import { useTeamStore } from "@/store/useTeam"
-import { TeamRole } from "@/store/interfaces"
+import { useTeamStore } from "@/matchStore/useTeam"
+import { TeamRole } from "@/matchStore/interfaces"
 
 export default function PlayerManagement() {
   const { homeTeam, awayTeam, addPlayer } = useTeamStore()

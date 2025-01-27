@@ -1,4 +1,4 @@
-import { Formation } from "@/store/interfaces";
+import { Formation } from "@/matchStore/interfaces";
 
 // defaultFormation.ts
 export const defaultFormation:Formation[] = [

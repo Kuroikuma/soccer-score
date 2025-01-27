@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { IOverlays } from '@/store/interfaces'
-import { useOverlaysStore } from '@/store/overlayStore'
+import { IOverlays } from '@/matchStore/interfaces'
+import { useOverlaysStore } from '@/matchStore/overlayStore'
 // import socket from '@/services/socket'
 import { ScoreboardOverlay } from '@/components/overlays/ScoreboardOverlay'
 import { FormationOverlay } from '@/components/overlays/FormationOverlay'

@@ -5,10 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useState } from "react"
-import { useTimeStore } from "@/store/useTime"
-import { useTeamStore } from "@/store/useTeam"
-import { useEventStore } from "@/store/useEvent"
-import { TeamRole } from "@/store/interfaces"
+import { useTimeStore } from "@/matchStore/useTime"
+import { useTeamStore } from "@/matchStore/useTeam"
+import { useEventStore } from "@/matchStore/useEvent"
+import { TeamRole } from "@/matchStore/interfaces"
 
 export function Substitutions() {
   const { homeTeam, awayTeam } = useTeamStore()

@@ -1,4 +1,4 @@
-import { TimeState } from "@/store/interfaces"
+import { TimeState } from "@/matchStore/interfaces"
 import { create } from "zustand"
 import { useTeamStore } from "./useTeam"
 

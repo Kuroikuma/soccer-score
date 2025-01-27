@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useToast } from "@/hooks/use-toast"
 import { ScoreboardOverlay } from "./overlays/ScoreboardOverlay"
-import { useTeamStore } from "@/store/useTeam"
-import { useTimeStore } from "@/store/useTime"
-import { useEventStore } from "@/store/useEvent"
-import { TeamRole } from "@/store/interfaces"
+import { useTeamStore } from "@/matchStore/useTeam"
+import { useTimeStore } from "@/matchStore/useTime"
+import { useEventStore } from "@/matchStore/useEvent"
+import { TeamRole } from "@/matchStore/interfaces"
 
 export default function LiveMatch() {
   const { toast } = useToast()

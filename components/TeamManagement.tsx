@@ -13,8 +13,8 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { defaultFormation } from '@/lib/defaultFormation'
-import { Formation, TeamRole } from '@/store/interfaces'
-import { useTeamStore } from '@/store/useTeam'
+import { Formation, TeamRole } from '@/matchStore/interfaces'
+import { useTeamStore } from '@/matchStore/useTeam'
 
 export function TabTeamSetup() {
   const {

@@ -9,8 +9,8 @@ import {
 } from '../ui/select'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
-import { useTeamStore } from '@/store/useTeam'
-import { TeamRole } from '@/store/interfaces'
+import { useTeamStore } from '@/matchStore/useTeam'
+import { TeamRole } from '@/matchStore/interfaces'
 
 export function TabTeamCustomize() {
   const { homeTeam, awayTeam, updateTeam } = useTeamStore()

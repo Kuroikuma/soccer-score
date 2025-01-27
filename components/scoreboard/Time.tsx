@@ -1,4 +1,4 @@
-import { useTimeStore } from '@/store/useTime'
+import { useTimeStore } from '@/matchStore/useTime'
 
 export function Time() {
   const { time, period } = useTimeStore()

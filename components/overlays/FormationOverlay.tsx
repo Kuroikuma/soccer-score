@@ -1,4 +1,4 @@
-import { useTeamStore } from '@/store/useTeam'
+import { useTeamStore } from '@/matchStore/useTeam'
 import FormationSVG from '../svg/formation'
 import JerseySVG from '../svg/jersey'
 import PlayerPlate from '../formation/PlayerPlate'

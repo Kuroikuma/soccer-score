@@ -1,6 +1,6 @@
 import { TabsContent } from '@radix-ui/react-tabs'
 import { Button } from '../ui/button'
-import { useTeamStore } from '@/store/useTeam'
+import { useTeamStore } from '@/matchStore/useTeam'
 
 export function TabContentScore() {
   const { homeTeam, awayTeam, updateTeam } = useTeamStore()

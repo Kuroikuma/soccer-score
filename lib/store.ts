@@ -1,4 +1,4 @@
-import { Formation, MatchEvent, MatchState, Player, Staff, Substitution, Team, TeamRole } from "@/store/interfaces"
+import { Formation, MatchEvent, MatchState, Player, Staff, Substitution, Team, TeamRole } from "@/matchStore/interfaces"
 import { create } from "zustand"
 
 const defaultFormation: Formation = {

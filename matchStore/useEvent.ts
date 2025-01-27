@@ -1,4 +1,4 @@
-import { EventState, MatchEvent, Substitution } from "@/store/interfaces"
+import { EventState, MatchEvent, Substitution } from "@/matchStore/interfaces"
 import { create } from "zustand"
 import { useTeamStore } from "./useTeam"
 

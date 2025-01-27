@@ -1,6 +1,6 @@
-import { useEventStore } from '@/store/useEvent'
-import { useTeamStore } from '@/store/useTeam'
-import { useTimeStore } from '@/store/useTime'
+import { useEventStore } from '@/matchStore/useEvent'
+import { useTeamStore } from '@/matchStore/useTeam'
+import { useTimeStore } from '@/matchStore/useTime'
 import { useState, useEffect } from 'react'
 
 export interface EventGoal {

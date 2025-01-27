@@ -1,4 +1,4 @@
-import { OverlayState } from "@/store/interfaces"
+import { OverlayState } from "@/matchStore/interfaces"
 import { create } from "zustand"
 
 
@@ -29,14 +29,16 @@ export const useOverlaysStore = create<OverlaysStore>((set, get) => ({
     data: { x: number; y: number },
     isSaved = true
   ) => {
-    const { formationOverlay, scoreboardUpOverlay } = get()
+    const { formationOverlay, scoreboardUpOverlay, goalsDownOverlay, scoreBoardDownOverlay } = get()
 
     if (id === formationOverlay.id) {
       set({ formationOverlay: { ...formationOverlay, x: data.x, y: data.y } })
     } else if (id === scoreboardUpOverlay.id) {
       set({ scoreboardUpOverlay: { ...scoreboardUpOverlay, x: data.x, y: data.y } })
     } else if (id === "goalsDown") {
-      set({ goalsDownOverlay: { ...scoreboardUpOverlay, x: data.x, y: data.y } })
+      set({ goalsDownOverlay: { ...goalsDownOverlay, x: data.x, y: data.y } })
+    } else if (id === "scoreBoardDown") {
+      set({ scoreBoardDownOverlay: { ...scoreBoardDownOverlay, x: data.x, y: data.y } })
     }
   },
   handleScaleOverlay: async (
@@ -44,14 +46,14 @@ export const useOverlaysStore = create<OverlaysStore>((set, get) => ({
     scale: number,
     isSaved = true
   ) => {
-    const { formationOverlay, scoreboardUpOverlay } = get()
+    const { formationOverlay, scoreboardUpOverlay, goalsDownOverlay, scoreBoardDownOverlay } = get()
 
     if (id === formationOverlay.id) {
       set({ formationOverlay: { ...formationOverlay, scale } })
     } else if (id === scoreboardUpOverlay.id) {
       set({ scoreboardUpOverlay: { ...scoreboardUpOverlay, scale } })
     } else if (id === "goalsDown") {
-      set({ goalsDownOverlay: { ...scoreboardUpOverlay, scale } })
+      set({ goalsDownOverlay: { ...goalsDownOverlay, scale } })
     }
   },
   handleVisibleOverlay: async (
@@ -59,14 +61,16 @@ export const useOverlaysStore = create<OverlaysStore>((set, get) => ({
     visible: boolean,
     isSaved = true
   ) => {
-    const { formationOverlay, scoreboardUpOverlay } = get()
+    const { formationOverlay, scoreboardUpOverlay, goalsDownOverlay, scoreBoardDownOverlay } = get()
 
     if (id === formationOverlay.id) {
       set({ formationOverlay: { ...formationOverlay, visible } })
     } else if (id === scoreboardUpOverlay.id) {
       set({ scoreboardUpOverlay: { ...scoreboardUpOverlay, visible } })
     } else if (id === "goalsDown") {
-      set({ goalsDownOverlay: { ...scoreboardUpOverlay, visible } })
+      set({ goalsDownOverlay: { ...goalsDownOverlay, visible } })
+    } else if (id === "scoreBoardDown") {
+      set({ scoreBoardDownOverlay: { ...scoreBoardDownOverlay, visible } })
     }
   },
 }))

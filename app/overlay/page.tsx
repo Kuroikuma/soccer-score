@@ -4,7 +4,7 @@ import { useCallback, useState, useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import { useParams } from 'next/navigation'
 import { OverlaysItem } from './OverlaysItem'
-import { useOverlaysStore } from '@/store/overlayStore'
+import { useOverlaysStore } from '@/matchStore/overlayStore'
 
 const DraggableComponent = dynamic(
   () =>

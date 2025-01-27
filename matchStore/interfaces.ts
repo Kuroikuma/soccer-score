@@ -94,7 +94,7 @@ export interface EventNotification {
 
 export type PeriodName = "1st Half" | "2nd Half" | "1st Extra" | "2nd Extra"
 
-export interface MatchState {
+export interface MatchState2 {
   homeTeam: Team
   awayTeam: Team
   events: MatchEvent[]
@@ -141,7 +141,13 @@ export interface OverlayState {
   goalsDownOverlay: IOverlays
   scoreBoardDownOverlay: IOverlays
 }
+
 export interface TeamState {
   homeTeam: Team
   awayTeam: Team
+}
+
+export interface MatchState {
+  leagueName: string
+  leagueLogo: string
 }

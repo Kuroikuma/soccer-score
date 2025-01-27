@@ -1,4 +1,4 @@
-import { useTeamStore } from '@/store/useTeam'
+import { useTeamStore } from '@/matchStore/useTeam'
 import ArrowCircleLeft from '../svg/ArrowCircleLeft'
 
 export function HomeScore() {
