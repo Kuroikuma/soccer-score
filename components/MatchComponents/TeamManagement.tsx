@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { defaultFormation } from '@/lib/defaultFormation'
-import { Formation, TeamRole } from '@/matchStore/interfaces'
+import { FormationFootball, TeamRole } from '@/matchStore/interfaces'
 import { useTeamStore } from '@/matchStore/useTeam'
 
 export function TabTeamSetup() {
@@ -211,7 +211,7 @@ export function TabTeamSetup() {
                 onValueChange={(value) =>
                   updateFormation(selectedTeam, {
                     name: value,
-                    positions: (defaultFormation.find((f) => f.name === value) as Formation).positions,
+                    positions: (defaultFormation.find((f) => f.name === value) as FormationFootball).positions,
                   })
                 }
               >

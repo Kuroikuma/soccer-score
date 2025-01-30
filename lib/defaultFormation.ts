@@ -1,7 +1,7 @@
-import { Formation } from "@/matchStore/interfaces";
+import { FormationFootball } from "@/matchStore/interfaces";
 
 // defaultFormation.ts
-export const defaultFormation:Formation[] = [
+export const defaultFormation:FormationFootball[] = [
   {
     name: "4-4-2",
     positions: [

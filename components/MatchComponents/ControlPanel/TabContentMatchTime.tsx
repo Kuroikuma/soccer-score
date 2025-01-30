@@ -5,7 +5,7 @@ import { Button } from '../../ui/button'
 import { useTimeStore } from '@/matchStore/useTime'
 
 export function TabContentMatchTime() {
-  const { time, period, updateTime, updatePeriod, startMatch, pauseMatch, resetMatch } = useTimeStore()
+  const { time, period, updateMinutes, updatePeriod, startMatch, pauseMatch, resetMatch, updateSeconds, updateStoppage } = useTimeStore()
 
   return (
     <TabsContent value="match-time" className="p-4 space-y-4">
@@ -17,7 +17,7 @@ export function TabContentMatchTime() {
               type="number"
               value={time.minutes}
               onChange={(e) =>
-                updateTime({ minutes: Number.parseInt(e.target.value) || 0 })
+                updateMinutes({ minutes: Number.parseInt(e.target.value) || 0 })
               }
               className="bg-[#2a2438]"
             />
@@ -25,7 +25,7 @@ export function TabContentMatchTime() {
               variant="outline"
               size="icon"
               onClick={() =>
-                updateTime({ minutes: Math.max(0, time.minutes - 1) })
+                updateMinutes({ minutes: Math.max(0, time.minutes - 1) })
               }
               className="bg-[#2a2438] hover:bg-[#352d47]"
             >
@@ -34,7 +34,7 @@ export function TabContentMatchTime() {
             <Button
               variant="outline"
               size="icon"
-              onClick={() => updateTime({ minutes: time.minutes + 1 })}
+              onClick={() => updateMinutes({ minutes: time.minutes + 1 })}
               className="bg-[#2a2438] hover:bg-[#352d47]"
             >
               +
@@ -48,7 +48,7 @@ export function TabContentMatchTime() {
               type="number"
               value={time.seconds}
               onChange={(e) =>
-                updateTime({ seconds: Number.parseInt(e.target.value) || 0 })
+                updateSeconds({ seconds: Number.parseInt(e.target.value) || 0 })
               }
               className="bg-[#2a2438]"
             />
@@ -56,7 +56,7 @@ export function TabContentMatchTime() {
               variant="outline"
               size="icon"
               onClick={() =>
-                updateTime({ seconds: Math.max(0, time.seconds - 1) })
+                updateSeconds({ seconds: Math.max(0, time.seconds - 1) })
               }
               className="bg-[#2a2438] hover:bg-[#352d47]"
             >
@@ -66,7 +66,7 @@ export function TabContentMatchTime() {
               variant="outline"
               size="icon"
               onClick={() =>
-                updateTime({ seconds: Math.min(59, time.seconds + 1) })
+                updateSeconds({ seconds: Math.min(59, time.seconds + 1) })
               }
               className="bg-[#2a2438] hover:bg-[#352d47]"
             >
@@ -81,7 +81,7 @@ export function TabContentMatchTime() {
               type="number"
               value={time.stoppage}
               onChange={(e) =>
-                updateTime({ stoppage: Number.parseInt(e.target.value) || 0 })
+                updateStoppage({ stoppage: Number.parseInt(e.target.value) || 0 })
               }
               className="bg-[#2a2438]"
             />
@@ -89,7 +89,7 @@ export function TabContentMatchTime() {
               variant="outline"
               size="icon"
               onClick={() =>
-                updateTime({ stoppage: Math.max(0, time.stoppage - 1) })
+                updateStoppage({ stoppage: Math.max(0, time.stoppage - 1) })
               }
               className="bg-[#2a2438] hover:bg-[#352d47]"
             >
@@ -98,7 +98,7 @@ export function TabContentMatchTime() {
             <Button
               variant="outline"
               size="icon"
-              onClick={() => updateTime({ stoppage: time.stoppage + 1 })}
+              onClick={() => updateStoppage({ stoppage: time.stoppage + 1 })}
               className="bg-[#2a2438] hover:bg-[#352d47]"
             >
               +

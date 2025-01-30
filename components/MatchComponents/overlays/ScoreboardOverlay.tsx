@@ -4,6 +4,7 @@ import STActivoSVG from '../svg/logo-st-activo'
 import { Time } from '../scoreboard/Time'
 import { Score } from '../scoreboard/Score'
 import { EventMatch } from '../scoreboard/EventMatch'
+import { EventSubstitution } from '../scoreboard/EventSubstitution'
 
 export function ScoreboardOverlay() {
   return (
@@ -23,6 +24,7 @@ export function ScoreboardOverlay() {
             <div className="flex flex-col items-center justify-center gap-1 pl-2">
               <Score />
               <EventMatch />
+              <EventSubstitution />
             </div>
           </div>
         </div>

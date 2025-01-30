@@ -1,7 +1,7 @@
-import { Formation, MatchEvent, MatchState2, Player, Staff, Substitution, Team, TeamRole } from "@/matchStore/interfaces"
+import { FormationFootball, MatchEventFootball, MatchState2, PlayerFootball, StaffFootball, SubstitutionFootball, TeamFootball, TeamRole } from "@/matchStore/interfaces"
 import { create } from "zustand"
 
-const defaultFormation: Formation = {
+const defaultFormation: FormationFootball = {
   name: "4-4-2",
   positions: [
     { name: "GK", assigned: false, y:5, x:46 },
@@ -18,7 +18,7 @@ const defaultFormation: Formation = {
   ],
 }
 
-const defaultStaff: Staff = {
+const defaultStaff: StaffFootball = {
   manager: "",
   assistantManager: "",
   physio: "",
@@ -75,28 +75,20 @@ const initialState: MatchState2 = {
     showEvents: true,
     eventDuration: 5000,
   },
-  dropdown: {
-    enabled: false,
-    type: "Substitutes",
-    playerNumberOut: "",
-    playerNameOut: "",
-    playerNumberIn: "",
-    playerNameIn: "",
-  },
   substitutions: [],
 }
 
 interface MatchStore extends MatchState2 {
-  addPlayer: (teamRole: TeamRole, player: Omit<Player, "id">) => void
-  updateTeam: (team: TeamRole, updates: Partial<Team>) => void
-  updateStaff: (team: TeamRole, updates: Partial<Staff>) => void
-  updateFormation: (team: TeamRole, formation: Formation) => void
-  addEvent: (event: Omit<MatchEvent, "id">) => void
+  addPlayer: (teamRole: TeamRole, player: Omit<PlayerFootball, "id">) => void
+  updateTeam: (team: TeamRole, updates: Partial<TeamFootball>) => void
+  updateStaff: (team: TeamRole, updates: Partial<StaffFootball>) => void
+  updateFormation: (team: TeamRole, formation: FormationFootball) => void
+  addEvent: (event: Omit<MatchEventFootball, "id">) => void
   removeEvent: (eventId: string) => void
   startMatch: () => void
   pauseMatch: () => void
   resetMatch: () => void
-  addSubstitution: (substitution: Omit<Substitution, "id">) => void
+  addSubstitution: (substitution: Omit<SubstitutionFootball, "id">) => void
   removeSubstitution: (substitutionId: string) => void
   updatePeriod: (periodName: string) => void
   updateTime: (timeUpdate: Partial<typeof initialState.time>) => void

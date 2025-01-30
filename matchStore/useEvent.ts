@@ -1,4 +1,4 @@
-import { EventState, MatchEvent, Substitution } from "@/matchStore/interfaces"
+import { EventState, MatchEventFootball, SubstitutionFootball } from "@/matchStore/interfaces"
 import { create } from "zustand"
 import { useTeamStore } from "./useTeam"
 
@@ -74,22 +74,16 @@ const initialState: EventState = {
     showEvents: true,
     eventDuration: 5000,
   },
-  dropdown: {
-    enabled: false,
-    type: "Substitutes",
-    playerNumberOut: "",
-    playerNameOut: "",
-    playerNumberIn: "",
-    playerNameIn: "",
-  },
   substitutions: [],
 }
 
 interface MatchEventStore extends EventState {
-  addEvent: (event: Omit<MatchEvent, "id">) => void
-  addSubstitution: (substitution: Omit<Substitution, "id">) => void
+  addEvent: (event: Omit<MatchEventFootball, "id">) => void
+  addSubstitution: (substitution: Omit<SubstitutionFootball, "id">) => void
   removeSubstitution: (substitutionId: string) => void
   removeEvent: (eventId: string) => void
+  removeAllEvents: () => void
+  removeAllSubstitutions: () => void
 }
 
 export const useEventStore = create<MatchEventStore>((set, get) => ({
@@ -127,5 +121,8 @@ export const useEventStore = create<MatchEventStore>((set, get) => ({
         (sub) => sub.id !== substitutionId
       ),
     })),
+    removeAllSubstitutions: () => set({ substitutions: [] }),
+    removeAllEvents: () => set({ events: [] }),
+
 }))
 

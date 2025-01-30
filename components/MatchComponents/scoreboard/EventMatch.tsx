@@ -3,7 +3,7 @@ import { useEventStore } from '@/matchStore/useEvent'
 import { useTeamStore } from '@/matchStore/useTeam'
 import { useTimeStore } from '@/matchStore/useTime'
 import { CardPlayers } from './CardsPlayers'
-import EventSubstitution from './EventSubstitution'
+import IEventSubstitution from './EventSubstitution'
 import { formatName } from '@/lib/utils'
 
 export interface EventNotification {
@@ -66,12 +66,5 @@ export function EventMatch() {
     }
   }, [events, homeTeam, awayTeam])
 
-  return (
-    notification &&
-    (notification.type === 'substitution' ? (
-      <EventSubstitution notification={notification} />
-    ) : (
-      <CardPlayers notification={notification} />
-    ))
-  )
+  return notification && <CardPlayers notification={notification} />
 }

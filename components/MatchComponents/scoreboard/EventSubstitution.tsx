@@ -1,12 +1,56 @@
+import { formatName } from '@/lib/utils'
+import { useEventStore } from '@/matchStore/useEvent'
+import { useTeamStore } from '@/matchStore/useTeam'
+import { useTimeStore } from '@/matchStore/useTime'
+import { useState, useEffect } from 'react'
 import { EventNotification } from './EventMatch'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { SubstitutionFootball } from '@/matchStore/interfaces'
 
-
-interface EventSubstitutionProps {
-  notification: EventNotification
+interface IEventSubstitution extends SubstitutionFootball {
+  logo: string
 }
 
-const EventSubstitution = ({ notification }: EventSubstitutionProps) => {
+export const EventSubstitution = () => {
+  const { homeTeam, awayTeam } = useTeamStore()
+  const { time, period } = useTimeStore()
+  const { events, substitutions } = useEventStore()
+  const [notification, setNotification] = useState<IEventSubstitution | null>(
+    null
+  )
+
+  useEffect(() => {
+    if (events.length > 0) {
+      const latestEvent = substitutions[substitutions.length - 1]
+
+      const team = latestEvent.teamId === 'home' ? homeTeam : awayTeam
+
+      const substitute = team.players.find(
+        (p) => p.id === latestEvent.playerInId
+      )
+      const replacement = team.players.find(
+        (p) => p.id === latestEvent.playerOutId
+      )
+
+      if (substitute && replacement) {
+        const notification: IEventSubstitution = {
+          id: latestEvent.id,
+          minute: latestEvent.minute,
+          teamId: latestEvent.teamId,
+          playerOutId: formatName(replacement.name),
+          playerInId: formatName(substitute.name),
+          logo: team.logo ?? '/placeholder.svg',
+        }
+
+        setNotification(notification)
+
+        // Remove notification after 5 seconds
+        // setTimeout(() => {
+        //   setNotification(null)
+        // }, 5000)
+      }
+    }
+  }, [events, homeTeam, awayTeam])
 
   if (!notification) return <></>
 
@@ -33,19 +77,25 @@ const EventSubstitution = ({ notification }: EventSubstitutionProps) => {
           }}
         >
           <span className="text-white text-center text-2xl font-bold">
-            {notification.substitute}
+            {notification.playerInId}
           </span>
-          <ChevronUp strokeWidth={4} className="h-8 w-8 font-bold text-green-400 " />
+          <ChevronUp
+            strokeWidth={4}
+            className="h-8 w-8 font-bold text-green-400 "
+          />
         </div>
         <div className="h-[50%] bg-[rgba(0,7,85,.8)] w-full flex justify-between items-center pl-[20%] pr-2">
           <span className="text-white text-2xl font-bold">
-            {notification.replacement}
+            {notification.playerOutId}
           </span>
-          <ChevronDown strokeWidth={4} className="h-8 w-8 font-bold text-red-600 " />
+          <ChevronDown
+            strokeWidth={4}
+            className="h-8 w-8 font-bold text-red-600 "
+          />
         </div>
       </div>
     </div>
   )
 }
 
-export default EventSubstitution
+export default IEventSubstitution

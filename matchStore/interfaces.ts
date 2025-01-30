@@ -1,4 +1,4 @@
-export interface Player {
+export interface PlayerFootball {
   id: string
   name: string
   number: number
@@ -21,27 +21,27 @@ export type IOverlays = {
   id: string;
 }
 
-export interface Staff {
+export interface StaffFootball {
   manager: string
   assistantManager: string
   physio: string
 }
 
-export interface PositionFormation {
+export interface PositionFormationFootball {
   name: string
   assigned: boolean
   x: number
   y: number
 }
 
-export interface Formation {
+export interface FormationFootball {
   name: string // e.g. "4-4-2", "4-3-3"
-  positions: PositionFormation[]
+  positions: PositionFormationFootball[]
 }
 
 export type TeamRole = "home" | "away"
 
-export interface MatchEvent {
+export interface MatchEventFootball {
   id: string
   type: "goal" | "yellowCard" | "redCard" | "substitution"
   minute: number
@@ -51,7 +51,7 @@ export interface MatchEvent {
   replacedById?: string // for substitutions
 }
 
-export interface Substitution {
+export interface SubstitutionFootball {
   id: string
   minute: number
   teamId: TeamRole
@@ -59,7 +59,7 @@ export interface Substitution {
   playerInId: string
 }
 
-export interface Team {
+export interface TeamFootball {
   name: string
   shortName: string
   score: number
@@ -67,43 +67,53 @@ export interface Team {
   textColor: string
   logo: string
   logoFit: "contain" | "cover"
-  players: Player[]
-  staff: Staff
-  formation: Formation
+  players: PlayerFootball[]
+  staff: StaffFootball
+  formation: FormationFootball
   teamRole : TeamRole
   primaryColor: string
   secondaryColor: string
 }
 
-export interface Time {
+export interface TimeFootball {
   minutes: number
   seconds: number
   stoppage: number
   isRunning: boolean
 }
 
-export type EventNotificationType = "Substitutes" | "Goals" | "Cards"
 
-export interface EventNotification {
-  enabled: boolean
-  type: EventNotificationType
-  playerNumberOut: string
-  playerNameOut: string
-  playerNumberIn: string
-  playerNameIn: string
+export type PeriodNameFootball = "1st Half" | "2nd Half" | "1st Extra" | "2nd Extra"
+interface PeriodFootball {
+  name: PeriodNameFootball
+  active: boolean
 }
 
-export type PeriodName = "1st Half" | "2nd Half" | "1st Extra" | "2nd Extra"
+export interface IMatchFootball {
+  homeTeam: TeamFootball
+  awayTeam: TeamFootball
+  events: MatchEventFootball[]
+  time: TimeFootball
+  period: PeriodFootball[]
+  substitutions: SubstitutionFootball[]
+  scoreboardUpOverlay: IOverlays
+  formationOverlay: IOverlays
+  goalsDownOverlay: IOverlays
+  scoreBoardDownOverlay: IOverlays
+  previewOverlay: IOverlays
+  leagueName: string
+  leagueLogo: string
+  stadiumName: string
+  matchDate: string
+  id: string
+}
 
 export interface MatchState2 {
-  homeTeam: Team
-  awayTeam: Team
-  events: MatchEvent[]
-  time: Time
-  period: {
-    name: PeriodName
-    active: boolean
-  }[]
+  homeTeam: TeamFootball
+  awayTeam: TeamFootball
+  events: MatchEventFootball[]
+  time: TimeFootball
+  period: PeriodFootball[]
   overlay: {
     enabled: boolean
     horizontalPosition: number
@@ -111,12 +121,11 @@ export interface MatchState2 {
     showEvents: boolean
     eventDuration: number
   }
-  dropdown: EventNotification
-  substitutions: Substitution[]
+  substitutions: SubstitutionFootball[]
 }
 
 export interface EventState {
-  events: MatchEvent[]
+  events: MatchEventFootball[]
   overlay: {
     enabled: boolean
     horizontalPosition: number
@@ -124,16 +133,12 @@ export interface EventState {
     showEvents: boolean
     eventDuration: number
   }
-  dropdown: EventNotification
-  substitutions: Substitution[]
+  substitutions: SubstitutionFootball[]
 }
 
 export interface TimeState {
-  time: Time
-  period: {
-    name: PeriodName
-    active: boolean
-  }[]
+  time: TimeFootball
+  period: PeriodFootball[]
 }
 
 export interface OverlayState {
@@ -145,8 +150,8 @@ export interface OverlayState {
 }
 
 export interface TeamState {
-  homeTeam: Team
-  awayTeam: Team
+  homeTeam: TeamFootball
+  awayTeam: TeamFootball
 }
 
 export interface MatchState {

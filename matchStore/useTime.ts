@@ -1,6 +1,7 @@
-import { TimeState } from "@/matchStore/interfaces"
-import { create } from "zustand"
-import { useTeamStore } from "./useTeam"
+import { TimeState } from '@/matchStore/interfaces'
+import { create } from 'zustand'
+import { useTeamStore } from './useTeam'
+import { useEventStore } from './useEvent'
 
 const initialState: TimeState = {
   time: {
@@ -10,20 +11,22 @@ const initialState: TimeState = {
     isRunning: false,
   },
   period: [
-    { name: "1st Half", active: true },
-    { name: "2nd Half", active: false },
-    { name: "1st Extra", active: false },
-    { name: "2nd Extra", active: false },
+    { name: '1st Half', active: true },
+    { name: '2nd Half', active: false },
+    { name: '1st Extra', active: false },
+    { name: '2nd Extra', active: false },
   ],
 }
 
 interface TimeStore extends TimeState {
-
   startMatch: () => void
   pauseMatch: () => void
   resetMatch: () => void
   updatePeriod: (periodName: string) => void
   updateTime: (timeUpdate: Partial<typeof initialState.time>) => void
+  updateMinutes: (timeUpdate: Partial<typeof initialState.time>) => void
+  updateSeconds: (timeUpdate: Partial<typeof initialState.time>) => void
+  updateStoppage: (timeUpdate: Partial<typeof initialState.time>) => void
 }
 
 export const useTimeStore = create<TimeStore>((set, get) => ({
@@ -37,7 +40,6 @@ export const useTimeStore = create<TimeStore>((set, get) => ({
       time: { ...state.time, isRunning: false },
     })),
   resetMatch: () => {
-    
     set((state) => ({
       ...initialState,
       time: {
@@ -46,12 +48,12 @@ export const useTimeStore = create<TimeStore>((set, get) => ({
         stoppage: 0,
         isRunning: false,
       },
-      events: [],
-      substitutions: [],
     }))
 
-    useTeamStore.getState().updateTeam("home", { score: 0 })
-    useTeamStore.getState().updateTeam("away", { score: 0 })
+    useEventStore.getState().removeAllEvents()
+    useEventStore.getState().removeAllSubstitutions()
+    useTeamStore.getState().updateTeam('home', { score: 0 })
+    useTeamStore.getState().updateTeam('away', { score: 0 })
   },
   updatePeriod: (periodName) =>
     set((state) => ({
@@ -67,5 +69,25 @@ export const useTimeStore = create<TimeStore>((set, get) => ({
         ...timeUpdate,
       },
     })),
+  updateMinutes: (timeUpdate) =>
+    set((state) => ({
+      time: {
+        ...state.time,
+        ...timeUpdate,
+      },
+    })),
+  updateSeconds: (timeUpdate) =>
+    set((state) => ({
+      time: {
+        ...state.time,
+        ...timeUpdate,
+      },
+    })),
+  updateStoppage: (timeUpdate) =>
+    set((state) => ({
+      time: {
+        ...state.time,
+        ...timeUpdate,
+      },
+    })),
 }))
-

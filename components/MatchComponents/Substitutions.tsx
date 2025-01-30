@@ -12,7 +12,7 @@ import { TeamRole } from "@/matchStore/interfaces"
 
 export function Substitutions() {
   const { homeTeam, awayTeam } = useTeamStore()
-  const { time,   } = useTimeStore()
+  const { time   } = useTimeStore()
   const { addSubstitution, removeSubstitution, substitutions } = useEventStore()
   const [selectedTeam, setSelectedTeam] = useState<TeamRole>("home")
   const [playerOutId, setPlayerOutId] = useState("")

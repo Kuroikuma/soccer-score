@@ -1,7 +1,7 @@
-import { Formation, Player, Staff, Team, TeamRole, TeamState } from "@/matchStore/interfaces"
+import { FormationFootball, PlayerFootball, StaffFootball, TeamFootball, TeamRole, TeamState } from "@/matchStore/interfaces"
 import { create } from "zustand"
 
-const defaultFormation: Formation = {
+const defaultFormation: FormationFootball = {
   name: "4-4-2",
   positions: [
     { name: "GK", assigned: false, y:5, x:46 },
@@ -18,7 +18,7 @@ const defaultFormation: Formation = {
   ],
 }
 
-const defaultStaff: Staff = {
+const defaultStaff: StaffFootball = {
   manager: "Alexander Ampie",
   assistantManager: "",
   physio: "",
@@ -192,10 +192,10 @@ const initialState: TeamState = {
 }
 
 interface TeamStore extends TeamState {
-  addPlayer: (teamRole: TeamRole, player: Omit<Player, "id">) => void
-  updateTeam: (team: TeamRole, updates: Partial<Team>) => void
-  updateStaff: (team: TeamRole, updates: Partial<Staff>) => void
-  updateFormation: (team: TeamRole, formation: Formation) => void
+  addPlayer: (teamRole: TeamRole, player: Omit<PlayerFootball, "id">) => void
+  updateTeam: (team: TeamRole, updates: Partial<TeamFootball>) => void
+  updateStaff: (team: TeamRole, updates: Partial<StaffFootball>) => void
+  updateFormation: (team: TeamRole, formation: FormationFootball) => void
   updateTeamName: (team: TeamRole, name: string) => void
 }
 
@@ -234,7 +234,7 @@ export const useTeamStore = create<TeamStore>((set, get) => ({
         ...updates,
       },
     })),
-    updateTeamName: (team, name) =>
+  updateTeamName: (team, name) =>
     set((state) => ({
       [team === "home" ? "homeTeam" : "awayTeam"]: {
         ...state[team === "home" ? "homeTeam" : "awayTeam"],
